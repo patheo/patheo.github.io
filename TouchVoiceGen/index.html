@@ -1,0 +1,593 @@
+<html>
+<head>
+  <title>Controler</title>
+
+  <!-- Chargement des bibliothèques JS -->
+    <script src="libary/jquery-2.1.4.min.js"></script>
+    <script src="libary/interact.min.js"></script>
+    <script src="libary/jquery.knob.min.js"></script>
+    <script src="libary/p5.js"></script>
+    <script src="libary/p5.sound.js"></script>
+    <script src="looper.js"></script>
+
+  <style type="text/css">
+  .noeud {
+    width:100px;
+    height:100px;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .noeudMvt {
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .effet {
+    width:68px;
+    height:68px;
+    border-radius: 70px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .effetMvt {
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-family: Impact;
+    color: black;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .buttonFixe {
+    text-align: center;
+    width:30px;
+    height:30px;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-family: Impact;
+    color: black;
+    font-size: 20px;
+    transition: background-color 0.3s;
+  }
+
+  .tempoLed {
+    width:30px;
+    height:30px;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .effetBgd {
+    width:210px;
+    height:50px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  </style>
+</head>
+<!-- Initialisation de la classe DIAL -->
+  <script>
+
+  var audiocontext = new(window.AudioContext || window.webkitAudioContext) ();
+  var fausa = faust.looper(audiocontext , 4096);
+
+    $(function() {
+      $(".dial").knob({
+          change: function (value) {
+           fausa.setValue("/0x00/" + this.$.attr('id') , parseInt(value));
+           //console.log("/0x00/" + this.$.attr('id') + " // " + parseInt(value));
+           this.$.attr('value', value);
+          },
+            'min':0,
+            'max':100,
+            'angleArc':320,
+            'angleOffset':-160,
+            'bgColor': 'rgba(255, 255, 255, 0.3)',
+            'fgColor': 'rgba(255, 255, 255, 0.8)',
+            'width': "100%"
+      });
+    });
+
+  </script>
+
+<!-- Initialisation des objets
+Les id vont servir à l'adressage des effet Max. NomNoeud/NomEffet/Param/Value-->
+  <div id="fondEcran" style="position:absolute; left:0px;top:0px"></div>
+
+  <div id="0">
+    <div id="Del0">
+      <input id="DelVol0"></input>
+      <div id="DelMov0"></br>Del</div>
+    </div>
+    <div id="Fil0">
+      <input id="FilVol0"></input>
+      <div id="FilMov0"></br>Fil</div>
+    </div>
+    <div id="Oct0">
+      <input id="OctVol0"></input>
+      <div id="OctMov0"></br>Oct</div>
+    </div>
+    <div id="Res0">
+      <input id="ResVol0"></input>
+      <div id="ResMov0"></br>Res</div>
+    </div>
+    <div id="Rev0">
+      <input id="RevVol0"></input>
+      <div id="RevMov0"></br>Rev</div>
+    </div>
+    <div id="Sat0">
+      <input id="SatVol0"></input>
+      <div id="SatMov0"></br>Sat</div>
+    </div>
+    <input id="Vol0"></input>
+    <div id="Mov0"></div>
+    <div id="EfV0">V</div>
+
+  </div>
+
+<!-- Initialisation noeud 1 -->
+  <div id="1">
+    <div id="Del1">
+      <input id="DelVol1"></input>
+      <div id="DelMov1"></br>Del</div>
+    </div>
+    <div id="Fil1">
+      <input id="FilVol1"></input>
+      <div id="FilMov1"></br>Fil</div>
+    </div>
+    <div id="Oct1">
+      <input id="OctVol1"></input>
+      <div id="OctMov1"></br>Oct</div>
+    </div>
+    <div id="Res1">
+      <input id="ResVol1"></input>
+      <div id="ResMov1"></br>Res</div>
+    </div>
+    <div id="Rev1">
+      <input id="RevVol1"></input>
+      <div id="RevMov1"></br>Rev</div>
+    </div>
+    <div id="Sat1">
+      <input id="SatVol1"></input>
+      <div id="SatMov1"></br>Sat</div>
+    </div>
+    <input id="Vol1"></input>
+    <div id="Mov1"></div>
+    <div id="EfV1">V</div>
+
+  </div>
+
+<div id="2">
+  <div id="Del2">
+    <input id="DelVol2"></input>
+    <div id="DelMov2"></br>Del</div>
+  </div>
+  <div id="Fil2">
+    <input id="FilVol2"></input>
+    <div id="FilMov2"></br>Fil</div>
+  </div>
+  <div id="Oct2">
+    <input id="OctVol2"></input>
+    <div id="OctMov2"></br>Oct</div>
+  </div>
+  <div id="Res2">
+    <input id="ResVol2"></input>
+    <div id="ResMov2"></br>Res</div>
+  </div>
+  <div id="Rev2">
+    <input id="RevVol2"></input>
+    <div id="RevMov2"></br>Rev</div>
+  </div>
+  <div id="Sat2">
+    <input id="SatVol2"></input>
+    <div id="SatMov2"></br>Sat</div>
+  </div>
+  <input id="Vol2"></input>
+  <div id="Mov2"></div>
+  <div id="EfV2">V</div>
+</div>
+
+<div id="3">
+  <div id="Del3">
+    <input id="DelVol3"></input>
+    <div id="DelMov3"></br>Del</div>
+  </div>
+  <div id="Fil3">
+    <input id="FilVol3"></input>
+    <div id="FilMov3"></br>Fil</div>
+  </div>
+  <div id="Oct3">
+    <input id="OctVol3"></input>
+    <div id="OctMov3"></br>Oct</div>
+  </div>
+  <div id="Res3">
+    <input id="ResVol3"></input>
+    <div id="ResMov3"></br>Res</div>
+  </div>
+  <div id="Rev3">
+    <input id="RevVol3"></input>
+    <div id="RevMov3"></br>Rev</div>
+  </div>
+  <div id="Sat3">
+    <input id="SatVol3"></input>
+    <div id="SatMov3"></br>Sat</div>
+  </div>
+  <input id="Vol3"></input>
+  <div id="Mov3"></div>
+  <div id="EfV3">V</div>
+</div>
+
+
+<div id="4">
+  <div id="Del4">
+    <input id="DelVol4"></input>
+    <div id="DelMov4"></br>Del</div>
+  </div>
+  <div id="Fil4">
+    <input id="FilVol4"></input>
+    <div id="FilMov4"></br>Fil</div>
+  </div>
+  <div id="Oct4">
+    <input id="OctVol4"></input>
+    <div id="OctMov4"></br>Oct</div>
+  </div>
+  <div id="Res4">
+    <input id="ResVol4"></input>
+    <div id="ResMov4"></br>Res</div>
+  </div>
+  <div id="Rev4">
+    <input id="RevVol4"></input>
+    <div id="RevMov4"></br>Rev</div>
+  </div>
+  <div id="Sat4">
+    <input id="SatVol4"></input>
+    <div id="SatMov4"></br>Sat</div>
+  </div>
+  <input id="Vol4"></input>
+  <div id="Mov4"></div>
+  <div id="EfV4">V</div>
+</div>
+
+
+<div id="5">
+  <div id="Del5">
+    <input id="DelVol5"></input>
+    <div id="DelMov5"></br>Del</div>
+  </div>
+  <div id="Fil5">
+    <input id="FilVol5"></input>
+    <div id="FilMov5"></br>Fil</div>
+  </div>
+  <div id="Oct5">
+    <input id="OctVol5"></input>
+    <div id="OctMov5"></br>Oct</div>
+  </div>
+  <div id="Res5">
+    <input id="ResVol5"></input>
+    <div id="ResMov5"></br>Res</div>
+  </div>
+  <div id="Rev5">
+    <input id="RevVol5"></input>
+    <div id="RevMov5"></br>Rev</div>
+  </div>
+  <div id="Sat5">
+    <input id="SatVol5"></input>
+    <div id="SatMov5"></br>Sat</div>
+  </div>
+  <input id="Vol5"></input>
+  <div id="Mov5"></div>
+  <div id="EfV5">V</div>
+</div>
+
+  <script>
+// Initialisation des attributs des Effets
+
+"use strict"
+
+var nbNoeud = 6;
+var mouvement = 0;
+var i;
+var id;
+var idx;
+
+var colorBgd = new Array;
+colorBgd[0] = "rgba(255, 0, 125, 0.5)";
+colorBgd[1] = "rgba(125, 255, 0, 0.5)";
+colorBgd[2] = "rgba(0, 125, 255, 0.5)";
+colorBgd[3] = "rgba(0, 255, 125, 0.5)";
+colorBgd[4] = "rgba(125, 0, 255, 0.5)";
+colorBgd[5] = "rgba(255, 125, 0, 0.5)";
+
+var colorReset = "rgba(255, 255, 255, 0.3)",
+    colorOff = "rgba(255, 255, 255, 0.5)",
+    colorMon = "rgba(0, 0, 255, 0.5)",
+    colorRec = "rgba(255, 0, 0, 0.5)",
+    colorPly = "rgba(0, 255, 0, 0.5)";
+// Création d'un noeud
+
+var SizeY = ($(window).height()/8);
+var SizeX = ($(window).width()/2);
+
+for(i = 0 ; i<(nbNoeud) ; i++){
+  //Noeud général
+  $("#" + i)
+      .css({"position":"absolute", "left":0, "top":0})
+      .attr({"class":"noeud", "data-x":(100*Math.cos(2*Math.PI/nbNoeud*i)) + SizeX, "data-y":(100*Math.sin(2*Math.PI/nbNoeud*i)) + SizeY, "mode":0});
+  $("#Vol" + i)
+      .css({"position":"absolute", "left":0, "top":0})
+      .attr({"type":"text", "class":"dial", "data-displayInput":"false", "value":0});
+  $("#Mov"  + i)
+      .css({"position":"absolute", "left":20, "top":20, "width":60, "height":60, "background-color":colorBgd[i]})
+      .attr({"class":"noeudMvt", "rotate":0});
+  $("#EfV"  + i)
+      .css({"position":"absolute", "left":35, "top":105})
+      .attr({"class":"buttonFixe", "etat":0});
+  $('#' + i).css({"-webkit-transform":"translate(" + $('#' + i).attr('data-x') + "px , " + $('#' + i).attr('data-y') + "px)"});
+
+  // Delay
+  $("#Del"  + i)
+      .css({"position":"absolute", "left":17, "top":17})
+      .attr({"class":"effet", 'data-x': 100*Math.cos(2*Math.PI), "data-y": 100*Math.sin(2*Math.PI), "distance": 100})
+      .hide("slow");
+  $("#DelVol"  + i)
+      .css({"position":"absolute", "left":0, "top":0})
+      .attr({"type":"text", "class":"dial", "data-displayInput":"false","value":0});
+  $("#DelMov"  + i)
+      .css({"position":"absolute", "left":17, "top":17, "width":34, "height":34})
+      .attr({"class":"effetMvt"});
+  $('#Del'  + i).css({"-webkit-transform":"translate(" + $('#Del' + i).attr('data-x') + "px , " + $('#Del' + i).attr('data-y') + "px)"});
+
+  // filter
+  $("#Fil"  + i)
+      .css({"position":"absolute", "left":17, "top":17})
+      .attr({"class":"effet", 'data-x': 100*Math.cos(2*Math.PI/6), "data-y": 100*Math.sin(2*Math.PI/6), "distance": 100})
+      .hide("slow");
+  $("#FilVol"  + i)
+      .css({"position":"absolute", "left":0, "top":0})
+      .attr({"type":"text", "class":"dial", "data-displayInput":"false","value":0});
+  $("#FilMov"  + i)
+      .css({"position":"absolute", "left":17, "top":17, "width":34, "height":34})
+      .attr({"class":"effetMvt"});
+  $('#Fil'  + i).css({"-webkit-transform":"translate(" + $('#Fil' + i).attr('data-x') + "px , " + $('#Fil' + i).attr('data-y') + "px)"});
+
+  // Octaver
+  $("#Oct"  + i)
+      .css({"position":"absolute", "left":17, "top":17})
+      .attr({"class":"effet", 'data-x': 100*Math.cos(2*Math.PI/3), "data-y": 100*Math.sin(2*Math.PI/3), "distance": 100})
+      .hide("slow");
+  $("#OctVol"  + i)
+      .css({"position":"absolute", "left":0, "top":0})
+      .attr({"type":"text", "class":"dial", "data-displayInput":"false","value":0});
+  $("#OctMov"  + i)
+      .css({"position":"absolute", "left":17, "top":17, "width":34, "height":34})
+      .attr({"class":"effetMvt"});
+  $('#Oct'  + i).css({"-webkit-transform":"translate(" + $('#Oct' + i).attr('data-x') + "px , " + $('#Oct' +i).attr('data-y') + "px)"});
+
+  // resonator
+  $("#Res"  + i)
+      .css({"position":"absolute", "left":17, "top":17})
+      .attr({"class":"effet", 'data-x': 100*Math.cos(2*Math.PI/2), "data-y": 100*Math.sin(2*Math.PI/2), "distance": 100})
+      .hide("slow");
+  $("#ResVol"  + i)
+      .css({"position":"absolute", "left":0, "top":0})
+      .attr({"type":"text", "class":"dial", "data-displayInput":"false","value":0});
+  $("#ResMov"  + i)
+      .css({"position":"absolute", "left":17, "top":17, "width":34, "height":34})
+      .attr({"class":"effetMvt"});
+  $('#Res'  + i).css({"-webkit-transform":"translate(" + $('#Res' +i).attr('data-x') + "px , " + $('#Res' +i).attr('data-y') + "px)"});
+
+  //Reverb
+  $("#Rev"  + i)
+      .css({"position":"absolute", "left":17, "top":17})
+      .attr({"class":"effet", 'data-x': 100*Math.cos(2*Math.PI/3*2), 'data-y': 100*Math.sin(2*Math.PI/3*2), "distance": 100})
+      .hide("slow");
+  $("#RevVol"  + i)
+      .css({"position":"absolute", "left":0, "top":0})
+      .attr({"type":"text", "class":"dial", "data-displayInput":"false","value":0});
+  $("#RevMov"  + i)
+      .css({"position":"absolute", "left":17, "top":17, "width":34, "height":34})
+      .attr({"class":"effetMvt"});
+  $('#Rev'  + i).css({"-webkit-transform":"translate(" + $('#Rev' + i).attr('data-x') + "px , " + $('#Rev' +i).attr('data-y') + "px)"});
+
+  // satu
+  $("#Sat"  + i)
+      .css({"position":"absolute", "left":17, "top":17})
+      .attr({"class":"effet", "data-x": 100*Math.cos(2*Math.PI/6*5), "data-y": 100*Math.sin(2*Math.PI/6*5), "distance": 100})
+      .hide("slow");
+  $("#SatVol"  + i)
+      .css({"position":"absolute", "left":0, "top":0})
+      .attr({"type":"text", "class":"dial", "data-displayInput":"false","value":0});
+  $("#SatMov"  + i)
+      .css({"position":"absolute", "left":17, "top":17, "width":34, "height":34})
+      .attr({"class":"effetMvt"});
+  $('#Sat'  + i).css({"-webkit-transform":"translate(" + $('#Sat' + i).attr('data-x') + "px , " + $('#Sat' + i).attr('data-y') + "px)"});
+}
+
+interact('.effetMvt')
+  .draggable({
+    inertia: true,
+    autoScroll: false,
+
+    onmove: function (event) {
+      var target = event.target,
+          parent = target.parentNode,
+          x = (parseFloat(parent.getAttribute('data-x')) || 0) + event.dx,
+          y = (parseFloat(parent.getAttribute('data-y')) || 0) + event.dy,
+
+          distance = dist(0, 0, x, y);
+          parent.setAttribute("distance", distance);
+
+      parent.style.webkitTransform =
+          'translate(' + x + 'px, ' + y + 'px)';
+            // update the posiion attributes
+      if(distance < 200 && distance > 80){
+        parent.setAttribute('data-x', x);
+        parent.setAttribute('data-y', y);
+        fausa.setValue("/0x00/" + target.getAttribute('id'), distance);
+        //console.log("/0x00/" + target.getAttribute('id') + " // " + distance);
+      }
+    }
+  });
+
+interact('.noeudMvt')
+  .draggable({
+    inertia: true,
+    autoScroll: false,
+
+    onmove: function (event) {
+      var target = event.target,
+          parent = target.parentNode,
+              // keep the dragged position in the data-x/data-y attributes
+          x = (parseFloat(parent.getAttribute('data-x')) || 0) + event.dx,
+          y = (parseFloat(parent.getAttribute('data-y')) || 0) + event.dy;
+
+      parent.style.webkitTransform =
+        'translate(' + x + 'px, ' + y + 'px)';
+
+      if(x > 0 && x < ($(window).width()-100) && y > 0 && y < ($(window).height()-100)){
+        parent.setAttribute('data-x', x);
+        parent.setAttribute('data-y', y);
+        fausa.setValue("/0x00/" + target.getAttribute('id').substr(0,3) + "X" + target.getAttribute('id').substr(3,1), (x - (($(window).width()-100)/2))/50);
+        //console.log("/0x00/" + target.getAttribute('id').substr(0,3) + "X" + target.getAttribute('id').substr(3,1) + " " + (x - (($(window).width()-100)/2))/50);
+        fausa.setValue("/0x00/" + target.getAttribute('id').substr(0,3) + "Y" + target.getAttribute('id').substr(3,1), ((y + 50 - ($(window).height()/2))/50)*(-1));
+        //console.log("/0x00/" + target.getAttribute('id').substr(0,3) + "Y" + target.getAttribute('id').substr(3,1) + " " + ((y + 50 - ($(window).height()/2))/50)*(-1));
+        }
+    }
+  })
+
+interact('.buttonFixe')
+  .on('tap', function (event) {
+    var target = event.target;
+    var etat = ((parseInt(target.getAttribute('etat'))+1)%2);
+      if(target.getAttribute('id').substr(0, 3) == "EfV"){
+        if(etat == 0){
+          $('#Del'+ target.getAttribute('id').substr(3, 1)).hide("slow");
+          $('#Fil'+ target.getAttribute('id').substr(3, 1)).hide("slow");
+          $('#Oct'+ target.getAttribute('id').substr(3, 1)).hide("slow");
+          $('#Res'+ target.getAttribute('id').substr(3, 1)).hide("slow");
+          $('#Rev'+ target.getAttribute('id').substr(3, 1)).hide("slow");
+          $('#Sat'+ target.getAttribute('id').substr(3, 1)).hide("slow");
+          $("#Efv" + target.getAttribute('id').substr(3, 1)).css("backgroundColor" , "rgba(255, 0, 125, 0.8)");
+        }else{
+          $('#Del'+ target.getAttribute('id').substr(3, 1)).show("slow");
+          $('#Fil'+ target.getAttribute('id').substr(3, 1)).show("slow");
+          $('#Oct'+ target.getAttribute('id').substr(3, 1)).show("slow");
+          $('#Res'+ target.getAttribute('id').substr(3, 1)).show("slow");
+          $('#Rev'+ target.getAttribute('id').substr(3, 1)).show("slow");
+          $('#Sat'+ target.getAttribute('id').substr(3, 1)).show("slow");
+          $("#Efv" + target.getAttribute('id').substr(3, 1)).css("backgroundColor" , colorOff);
+        }
+      }
+    event.currentTarget.setAttribute('etat', etat);
+  });
+
+  // Dessin P5.Js
+  var alphaEvolutif = 0;
+
+  function setup(){
+    var myCanvas = createCanvas(windowWidth, windowHeight);
+    myCanvas.parent('fondEcran');
+  }
+
+  function draw(){
+    background(50);
+    frameRate(30);
+
+    // Centre
+    strokeWeight(1);
+    stroke('rgba(255, 255, 255, 0.8)');
+    line((windowWidth)/2, windowHeight/2-50, (windowWidth)/2, windowHeight/2+50);
+    line((windowWidth)/2-50, windowHeight/2, (windowWidth)/2+50, windowHeight/2);
+
+    // Cercle
+
+/*
+    for(i = 0 ; i < nbNoeud ; i++){
+      var posRefX = parseFloat($("#" + i).attr('data-x'))+50;
+      var posRefY = parseFloat($("#" + i).attr('data-y'))+50;
+      var alphaRef = parseFloat($("#Vol" + i).attr("value"))/100;
+      var posXrev = parseFloat($("#Rev" + i).attr('data-x'))+posRefX+1;
+      var posYrev = parseFloat($("#Rev" + i).attr('data-y'))+posRefY+1;
+      var borderrev = (parseFloat($("#Rev" + i).attr('distance'))-78)/120;
+      var alpharev = parseFloat($("#RevVol" + i).attr("value"))/100;
+      var posXsat = parseFloat($("#Sat" + i).attr('data-x'))+posRefX+1;
+      var posYsat = parseFloat($("#Sat" + i).attr('data-y'))+posRefY+1;
+      var bordersat = (parseFloat($("#Sat" + i).attr('distance'))-78)/120;
+      var alphasat = parseFloat($("#SatVol" + i).attr("value"))/100;
+      var posXfil = parseFloat($("#Fil" + i).attr('data-x'))+posRefX+1;
+      var posYfil = parseFloat($("#Fil" + i).attr('data-y'))+posRefY+1;
+      var borderfil = (parseFloat($("#Fil" + i).attr('distance'))-78)/120;
+      var alphafil = parseFloat($("#FilVol" + i).attr("value"))/100;
+      var posXres = parseFloat($("#Res" + i).attr('data-x'))+posRefX+1;
+      var posYres = parseFloat($("#Res" + i).attr('data-y'))+posRefY+1;
+      var borderres = (parseFloat($("#Res" + i).attr('distance'))-78)/120;
+      var alphares = parseFloat($("#ResVol" + i).attr("value"))/100;
+      var posXoct = parseFloat($("#Oct" + i).attr('data-x'))+posRefX+1;
+      var posYoct = parseFloat($("#Oct" + i).attr('data-y'))+posRefY+1;
+      var borderoct = (parseFloat($("#Oct" + i).attr('distance'))-78)/120;
+      var alphaoct = parseFloat($("#OctVol" + i).attr("value"))/100;
+      var posXdel = parseFloat($("#Del" + i).attr('data-x'))+posRefX+1;
+      var posYdel = parseFloat($("#Del" + i).attr('data-y'))+posRefY+1;
+      var borderdel = (parseFloat($("#Del" + i).attr('distance'))-78)/120;
+      var alphadel = parseFloat($("#DelVol" + i).attr("value"))/100;
+
+      noStroke();
+      if($("#"+ i).attr('mode') == 1 ){
+        for(idx=0; idx<1 ; idx++){
+          fill(colorMon);
+          ellipse(posRefX+(60*Math.sin(2*Math.PI*(mouvement+(0.02*idx)))),posRefY+(60*Math.cos(2*Math.PI*(mouvement+(0.02*idx)))),6,6);
+        }
+      }
+      if($("#"+ i).attr('mode') == 2 ){
+        for(idx=0; idx<1 ; idx++){
+          fill(colorRec);
+          ellipse(posRefX+(60*Math.sin(2*Math.PI*(mouvement+(0.02*idx)))),posRefY+(60*Math.cos(2*Math.PI*(mouvement+(0.02*idx)))),6,6);
+        }
+      }
+      if($("#"+ i).attr('mode') == 3 ){
+        for(idx=0; idx<1 ; idx++){
+          fill(colorPly);
+          ellipse(posRefX+(60*Math.sin(2*Math.PI*(mouvement+(0.02*idx)))),posRefY+(60*Math.cos(2*Math.PI*(mouvement+(0.02*idx)))),6,6);
+        }
+      }
+      strokeWeight(1);
+    for(id=1 ; id< 2 ; id++){
+        fill('rgba(255, 125, 0, ' + (alphadel*(id/20+0.5)) +')');
+        stroke('rgba(255, 125, 0, ' + borderdel +')');
+        ellipse(((Math.sin(mouvement+(0.2*id))+1)/2*(posXdel-posRefX)+posRefX), ((Math.sin(mouvement+(0.2*id))+1)/2*(posYdel-posRefY)+posRefY), 6, 6);
+
+        fill('rgba(255, 0, 125, ' + (alpharev*(id/20+0.5))+')');
+        stroke('rgba(255, 0, 125, ' + borderrev +')');
+        ellipse(((Math.sin(mouvement+(0.2*id))+1)/2*(posXrev-posRefX)+posRefX), ((Math.sin(mouvement+(0.2*id))+1)/2*(posYrev-posRefY)+posRefY), 6, 6);
+
+        fill('rgba(0, 125, 255, ' + (alphares*(id/20+0.5)) +')');
+        stroke('rgba(0, 125, 255, ' + borderres +')');
+        ellipse(((Math.sin(mouvement+(0.2*id))+1)/2*(posXres-posRefX)+posRefX), ((Math.sin(mouvement+(0.2*id))+1)/2*(posYres-posRefY)+posRefY), 6, 6);
+
+        fill('rgba(125, 255, 0, ' + (alphafil*(id/20+0.5)) +')');
+        stroke('rgba(125, 255, 0, ' + borderfil +')');
+        ellipse(((Math.sin(mouvement+(0.2*id))+1)/2*(posXfil-posRefX)+posRefX), ((Math.sin(mouvement+(0.2*id))+1)/2*(posYfil-posRefY)+posRefY), 6, 6);
+
+        fill('rgba(125, 0, 255, ' + (alphaoct*(id/20+0.5)) +')');
+        stroke('rgba(125, 0, 255, ' + borderoct +')');
+        ellipse(((Math.sin(mouvement+(0.2*id))+1)/2*(posXoct-posRefX)+posRefX), ((Math.sin(mouvement+(0.2*id))+1)/2*(posYoct-posRefY)+posRefY), 6, 6);
+
+        fill('rgba(0, 255, 125, ' + (alphasat*(id/20+0.5)) +')');
+        stroke('rgba(0, 255, 125, ' + bordersat +')');
+        ellipse(((Math.sin(mouvement+(0.2*id))+1)/2*(posXsat-posRefX)+posRefX), ((Math.sin(mouvement+(0.2*id))+1)/2*(posYsat-posRefY)+posRefY), 6, 6);
+      }
+    }*/
+    mouvement = mouvement+0.05;
+    //alphaEvolutif = alphaEvolutif+0.01;
+  }
+
+  function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }
+
+  fausa.start();
+
+  </script>
+</body>
+
+</html>
