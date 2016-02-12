@@ -1,0 +1,302 @@
+<html>
+<head>
+  <title>Controler</title>
+
+  <!-- Chargement des bibliothèques JS -->
+  <script src="JS/libary/jquery-2.1.4.min.js"></script>
+  <script src="JS/libary/interact.min.js"></script>
+  <script src="JS/libary/jquery.knob.min.js"></script>
+  <script src="JS/libary/p5.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="CSS/style.css" media="all"/>
+
+</head>
+
+<body>
+<script src="JS/styleDial.js"></script>
+
+<!-- Initialisation des objets
+Les id correspondent au nom des objets Faust-->
+<div id="fondEcran" style="position:absolute; left:0px;top:0px"></div>
+
+<!-- Interface Métronome
+Un Dial extérieur pour le Volume et un intérieur pour la vitesse-->
+<div id="Met">
+  <div id="MetVol">
+    <input id="V"</input>
+  </div>
+  <div id="MetSpeed">
+    <input id="S"</input>
+  </div>
+</div>
+
+<!-- Les Noeuds
+Chaque noeud porte l'adressage suivant :
+      <num> = numero du noeud
+      <num> = numero de l'effet
+      <mov ou vol> = paramètre édité
+
+    Pour les bontons = 0 1 2 3-->
+<!-- Noeud 0 -->
+<div id="0">
+    <div id="00">0</div>
+    <div id="01">1</div>
+    <div id="02">2</div>
+    <div id="03">3</div>
+    <div id="0View">V</div>
+  <div id="0Effect">
+    <div id="04Mov"></br>1</div>
+    <div id="05Mov"></br>2</div>
+    <div id="06Mov"></br>3</div>
+    <div id="07Mov"></br>4</div>
+    <div id="08Mov"></br>5</div>
+  </div>
+  <input id="0Vol"></input>
+  <div id="0Mov"></div>
+</div>
+
+<!-- Noeud 1 -->
+<div id="1">
+    <div id="10">0</div>
+    <div id="11">1</div>
+    <div id="12">2</div>
+    <div id="13">3</div>
+    <div id="1View">V</div>
+  <div id="1Effect">
+    <div id="14Mov"></br>1</div>
+    <div id="15Mov"></br>2</div>
+    <div id="16Mov"></br>3</div>
+    <div id="17Mov"></br>4</div>
+    <div id="18Mov"></br>5</div>
+  </div>
+  <input id="1Vol"></input>
+  <div id="1Mov"></div>
+</div>
+
+<!-- Noeud 2 -->
+<div id="2">
+    <div id="20">0</div>
+    <div id="21">1</div>
+    <div id="22">2</div>
+    <div id="23">3</div>
+    <div id="2View">V</div>
+  <div id="2Effect">
+    <div id="24Mov"></br>1</div>
+    <div id="25Mov"></br>2</div>
+    <div id="26Mov"></br>3</div>
+    <div id="27Mov"></br>4</div>
+    <div id="28Mov"></br>5</div>
+  </div>
+  <input id="2Vol"></input>
+  <div id="2Mov"></div>
+</div>
+
+<!-- Noeud 3 -->
+<div id="3">
+    <div id="30">0</div>
+    <div id="31">1</div>
+    <div id="32">2</div>
+    <div id="33">3</div>
+    <div id="3View">V</div>
+  <div id="3Effect">
+    <div id="34Mov"></br>1</div>
+    <div id="35Mov"></br>2</div>
+    <div id="36Mov"></br>3</div>
+    <div id="37Mov"></br>4</div>
+    <div id="38Mov"></br>5</div>
+  </div>
+  <input id="3Vol"></input>
+  <div id="3Mov"></div>
+</div>
+
+<!-- Noeud 4 -->
+<div id="4">
+    <div id="40">0</div>
+    <div id="41">1</div>
+    <div id="42">2</div>
+    <div id="43">3</div>
+    <div id="4View">V</div>
+  <div id="4Effect">
+    <div id="44Mov"></br>1</div>
+    <div id="45Mov"></br>2</div>
+    <div id="46Mov"></br>3</div>
+    <div id="47Mov"></br>4</div>
+    <div id="48Mov"></br>5</div>
+  </div>
+  <input id="4Vol"></input>
+  <div id="4Mov"></div>
+</div>
+
+<!-- Noeud 5 -->
+<div id="5">
+    <div id="50">0</div>
+    <div id="51">1</div>
+    <div id="52">2</div>
+    <div id="53">3</div>
+    <div id="5View">V</div>
+  <div id="5Effect">
+    <div id="54Mov"></br>1</div>
+    <div id="55Mov"></br>2</div>
+    <div id="56Mov"></br>3</div>
+    <div id="57Mov"></br>4</div>
+    <div id="58Mov"></br>5</div>
+  </div>
+  <input id="5Vol"></input>
+  <div id="5Mov"></div>
+</div>
+
+<script>
+// Initialisation des attributs des Effets
+
+"use strict"
+
+var nbNoeud = 6;
+var mouvement = 0;
+var theta = 0;
+var i;
+var id;
+var idx;
+var vol = 10;
+
+//Mise en place des couleurs de bases
+var bgd_P5 = "rgba(50, 0, 50, 0.3)"
+
+var colorBgd = new Array;
+colorBgd[0] = "rgba(255, 200, 125, 0.5)";
+colorBgd[1] = "rgba(125, 255, 200, 0.5)";
+colorBgd[2] = "rgba(200, 125, 255, 0.5)";
+colorBgd[3] = "rgba(200, 255, 125, 0.5)";
+colorBgd[4] = "rgba(125, 200, 255, 0.5)";
+colorBgd[5] = "rgba(255, 125, 200, 0.5)";
+
+var colorButReset = "rgba(255, 255, 255, 0.3)";
+var colorBut = new Array;
+colorBut[0] = "rgba(255, 255, 255, 0.1)";
+colorBut[1] = "rgba(0, 0, 255, 0.5)";
+colorBut[2] = "rgba(255, 0, 0, 0.5)";
+colorBut[3] = "rgba(0, 255, 0, 0.5)";
+
+// Définition de la chaine audio
+var effet1 = [0, 0, 0, 0, "Oct", "Sat", "Del", "Fil", "Rev"];
+var effet2 = [0, 0, 0, 0, "Fre", "Mun", "Res", "Rin", "Rev"];
+var effet = effet1;
+</script>
+
+<script src="JS/formatageDiv.js"></script>
+<script src="JS/interaction.js"></script>
+<script src="JS/dessinP5.js"></script>
+<script src="JS/effet1v200.js"></script>
+
+<script>
+
+var isWebKitAudio = (typeof (webkitAudioContext) !== "undefined");
+var audio_context = (isWebKitAudio) ? new webkitAudioContext() : new AudioContext();
+var audio_input = null;
+var effet1v200 = null;
+var faustsvg = null;
+var dsp_code = null;
+
+function changeBufferSize(buffer_size)
+{
+    var new_buffer_size = buffer_size.options[buffer_size.selectedIndex].value;
+    console.log(new_buffer_size);
+    startNeweffet1v200(new_buffer_size);
+}
+
+// Audio input handling
+
+function activateAudioInput()
+{
+    if (!navigator.getUserMedia) {
+        navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    }
+
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({audio:true}, getDevice, function(e) {
+                alert('Error getting audio input');
+                console.log(e);
+        });
+    } else {
+        alert('Audio input API not available');
+    }
+}
+
+function getDevice(device)
+{
+    // Create an AudioNode from the stream.
+    audio_input = audio_context.createMediaStreamSource(device);
+
+    // Connect it to the destination.
+    audio_input.connect(effet1v200.getProcessor());
+}
+
+function starteffet1v200Aux(buffer_size)
+{
+    console.log("startfreeverb %d", buffer_size);
+    if (effet1v200) {
+        if (audio_input) {
+            audio_input.disconnect(effet1v200.getProcessor());
+        }
+        _f4u$t.hard_delete(faustsvg);
+        effet1v200.stop();
+        effet1v200.destroy();
+    }
+    effet1v200 = faust.effet1v200(audio_context, buffer_size);
+    if (effet1v200.getNumInputs() > 0) {
+        activateAudioInput();
+    }
+    effet1v200.start();
+    console.log(effet1v200.json());
+    console.log(effet1v200.controls());
+}
+
+function starteffet1v200()
+{
+    starteffet1v200Aux(1024);
+}
+
+function startNeweffet1v200(buffer_size)
+{
+    starteffet1v200Aux(buffer_size);
+}
+
+// To activate audio on iOS
+window.addEventListener('touchstart', function() {
+
+	// create empty buffer
+	var buffer = audio_context.createBuffer(1, 1, 22050);
+	var source = audio_context.createBufferSource();
+	source.buffer = buffer;
+
+	// connect to output (your speakers)
+	source.connect(audio_context.destination);
+
+	// play the file
+	source.noteOn(0);
+
+}, false);
+
+// General
+
+$(starteffet1v200);
+console.log("Lancement AUdio");
+
+</script>
+
+<P>
+<center>
+<form method="POST" name="menu" >
+  <select name="selectedBuffer"
+    onChange="changeBufferSize(this.form.selectedBuffer)">
+    <option value = 256> 256 </option>
+    <option value = 512> 512 </option>
+    <option selected value = 1024> 1024 </option>
+    <option value = 2048> 2048 </option>
+    <option value = 4096> 4096 </option>
+    <option value = 8192> 8192 </option>
+  </select>
+</form>
+</center>
+
+</body>
+</html>

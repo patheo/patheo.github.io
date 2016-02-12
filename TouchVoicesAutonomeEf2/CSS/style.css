@@ -1,0 +1,62 @@
+.noeud {
+  width:100px;
+  height:100px;
+  border-radius: 100px;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  z-index: 0;
+}
+
+.changeInter {
+  width:100px;
+  height:100px;
+  border-radius: 100px;
+  background-color: yellow;
+  font-family: Impact;
+  color: black;
+  font-size: 25px;
+  text-align: center;
+  position: absolute;
+  z-index: 0;
+}
+
+.noeudMvt {
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  z-index: 0;
+}
+
+.effetGroup {
+  width:230px;
+  height:230px;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  z-index: 0;
+}
+
+.effetMvt {
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
+  font-family: Impact;
+  color: black;
+  font-size: 10px;
+  text-align: center;
+  position: absolute;
+  z-index: 0;
+}
+
+.buttonFixe {
+  text-align: center;
+  width:30px;
+  height:30px;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
+  font-family: Impact;
+  color: black;
+  font-size: 20px;
+  transition: background-color 0.3s;
+  position: absolute;
+  z-index: 0;
+}
