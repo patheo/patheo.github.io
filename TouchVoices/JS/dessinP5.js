@@ -21,6 +21,7 @@ function draw(){
   }
 
   // Cercle autour des noeuds
+
   for(i = 0 ; i < nbNoeud ; i++){
     var posRefX = parseFloat($("#" + i).attr('data-x'))+50;
     var posRefY = parseFloat($("#" + i).attr('data-y'))+50;

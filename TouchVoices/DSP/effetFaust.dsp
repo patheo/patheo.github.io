@@ -19,14 +19,14 @@ volume(Vol) = *(Vol : smooth(0.999));
 MetVolume = vslider("VolV",0,0,100,0.01)/(100);
 MetVit = vslider("VolS",10,0,100,0.01)/100*4+1;
 MetPhasor = (MetVit/100) : + ~ %(1000);
-Metronome = osc(440), asr(0.01, 100, 0.9, MetPhasor < 500) : * : hbargraph("metLevel",-1,1):*(MetVolume);
+Metronome = osc(440), asr(0.01, 100, 0.9, MetPhasor < 500) : * <: attach(_, (abs : max ~ -(0.01) : hbargraph("metLevel",-1,1))) : *(MetVolume);
 
-looper2(sel) = _ : *(min(1, sel)) <: *(sel : <(3) : smooth(0.99)), (rwtable(441000, 0.0, w, i, r) : *(sel > 2 : smooth(0.99))) :> _ with {
+looper2(sel) = _ : *(min(1, sel)) <: *(sel : <(3) : smooth(0.99)), (rwtable(441020, 0.0, w, i, r) : *(sel > 2 : smooth(0.99))) :> _ with {
   rec = int(sel) : ==(2) : sah2(MetPhasor <: (_, mem) : <) <: _, 1 , (_ : @(100)) : _ , - : *;
   play = int(sel) : ==(3) : sah2(MetPhasor <: (_, mem) : <) <: _, 1 , (_ : @(100)) : _ , - : *;
   w = max(0, 1 - abs(int(sel)-2)) : sah2(MetPhasor <: (_, mem) : <) : + ~ (rec, _, 0 : select2 : %(441000)) : int;
   i = _;
-  size = max(0, 1 - abs(int(sel)-2)) : sah2(MetPhasor <: (_, mem) : <) : + ~ (rec, _, 0 : select2) : max(100);
+  size = max(0, 1 - abs(int(sel)-2)) : sah2(MetPhasor <: (_, mem) : <) : + ~ (rec, _, 0 : select2) : max(100) : min(441000);
   r = max(0, 1 - abs(int(sel)-3)) : sah2(MetPhasor <: (_, mem) : <) : + ~ (play, _, 0 : select2 : %(size)) :int;
 };
 
@@ -77,8 +77,9 @@ process = _ <:
                       smoothDelay(hslider("DelX%i",100,0,200,0.1), hslider("DelY%i",0,0,200,0.1),button("DelB%i")) :
                       filter(hslider("FilX%i",150,0,200,0.1), hslider("FilY%i",0,0,200,0.1),button("FilB%i")) :
     				          reverb(hslider("RevX%i",200,0,200,0.1), hslider("RevY%i",0,0,200,0.1),button("RevB%i")) :
-                      volume(hslider("Vol%i", 0, 0, 100, 0.1)) : hbargraph("audioLevel%i",-1,1)),
+                      volume(hslider("Vol%i", 0, 0, 100, 0.1)) <:
+                      attach(_, (abs : max ~ -(0.01) : hbargraph("audioLevel%i",-1,10)))),
                     rayon(hslider("MovX%i",0,-15,15,0.01), hslider("MovY%i",5,-15,15,0.01)),
       							angle(hslider("MovX%i",0,-15,15,0.01), hslider("MovY%i",5,-15,15,0.01)) :
                     map(3)))
-                  :> decoderStereo(3), (Metronome <: _,_) :> _,_ : (min(1) : max(-1)),(min(1) : max(-1));
+                  :> decoderStereo(3), (Metronome <: _,_) :> _,_ ;
