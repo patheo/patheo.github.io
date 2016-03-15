@@ -31,6 +31,10 @@ Un Dial extérieur pour le Volume et un intérieur pour la vitesse-->
   </div>
 </div>
 
+<div id="HarpeNotes">
+  <input id="H"</input>
+</div>
+
 <!-- Les Noeuds
 Chaque noeud porte l'adressage suivant :
       <num> = numero du noeud
@@ -149,24 +153,25 @@ Chaque noeud porte l'adressage suivant :
 <div id="loading">
   <h1> Bienvenue sur la page Web du projet TouchVoices </h1>
   <p>La page est en chargement... Merci de patienter...<br><br>
-    Profitons-en pour présenter comment marche cet outil...<br>
-    En haut à gauche se trouve deux boutons qui gère le métronome (click) de l'outil<br>
+    Profitons en pour présenter comment marche cet outil...<br>
+    En haut à gauche se trouve deux boutons qui gère le métronome de l'outil<br>
     > le bouton interieur s'occupe de la vitesse<br>
-    > le bouton exterieur s'occupe du volume du métronome<br><br>
-    Ensuite il y a 6 "pastilles", c'est par là que le son passe.<br>
+    > le bouton exterieur s'occupe du volume du metronome<br>
+    Le bouton présent dessous permet de changer les notes jouées par la harpe<br><br>
+    Ensuite il y a 6 "pastilles", c'est par là que le son de la harpe passe.<br>
     En les deplaçant le son va se déplacer autour de la tête de l'auditeur...<br>
     Autour des "pastilles", il y a 4 boutons :<br>
-    Bouton 0 = Le micro est coupé<br>
-    Bouton 1 = Le son du micro passe dans la pastille<br>
+    Bouton 0 = La harpe est coupée<br>
+    Bouton 1 = Le son de la harpe passe dans la pastille<br>
     Bouton 2 = Le son est enregistré (attention cette fonction ne marche que sur le click)<br>
     Bouton 3 = Le son enregistré est joué en boucle (attention cette fonction ne marche que sur le click)<br>
     Bouton V = Permet l'affichage des modules d'effet<br><br>
     Pour ce module il suffit de cliquer sur les ronds pour activer les effets puis<br>
     de les deplacer dans le carré pour voir les modifications que cela fait.<br> <br>
-    Cet outil est en cours de développement est utilise des technologies en cours d'experimentation <br>
-    c'est pourquoi les temps de chargement peuvent être longs et le son peut quelques fois se figer. <br><br>
-    Projet réalisé avec les bibliothèques Jquery.js, Interact.js et P5.js <br>
-    et la couche audio est réalisée grâce au language Faust.
+    Cet outil est en cours de developement est utilise des technologies en cours d'expérimentation <br>
+    c'est pourquoi les temps de chargement peuvent être long et le son peut quelques fois se figer. <br><br>
+    Projet realiser avec les bibliotheques Jquery.js, Interact.js et P5.js <br>
+    et la couche audio est réalisé grâce au language Faust.
   </p>
 </div>
 
@@ -221,7 +226,6 @@ function audioReady(){
 // Mise en place de l'audio
 var isWebKitAudio = (typeof (webkitAudioContext) !== "undefined");
 var audio_context = (isWebKitAudio) ? new webkitAudioContext() : new AudioContext();
-var audio_input = null;
 var effetFaust = null;
 var faustsvg = null;
 var dsp_code = null;
@@ -233,48 +237,16 @@ function changeBufferSize(buffer_size)
     startNeweffetFaust(new_buffer_size);
 }
 
-// Audio input handling
-
-function activateAudioInput()
-{
-    if (!navigator.getUserMedia) {
-        navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    }
-
-    if (navigator.getUserMedia) {
-        navigator.getUserMedia({audio:true}, getDevice, function(e) {
-                alert('Error getting audio input');
-                console.log(e);
-        });
-    } else {
-        alert('Audio input API not available');
-    }
-}
-
-function getDevice(device)
-{
-    // Create an AudioNode from the stream.
-    audio_input = audio_context.createMediaStreamSource(device);
-
-    // Connect it to the destination.
-    audio_input.connect(effetFaust.getProcessor());
-}
 
 function starteffetFaustAux(buffer_size)
 {
     console.log("startAudioFX %d", buffer_size);
     if (effetFaust) {
-        if (audio_input) {
-            audio_input.disconnect(effetFaust.getProcessor());
-        }
         _f4u$t.hard_delete(faustsvg);
         effetFaust.stop();
         effetFaust.destroy();
     }
     effetFaust = faust.effetFaust(audio_context, buffer_size);
-    if (effetFaust.getNumInputs() > 0) {
-        activateAudioInput();
-    }
     effetFaust.start();
     console.log(effetFaust.json());
     console.log(effetFaust.controls());
@@ -282,7 +254,7 @@ function starteffetFaustAux(buffer_size)
 
 function starteffetFaust()
 {
-    starteffetFaustAux(1024);
+    starteffetFaustAux(256);
 }
 
 function startNeweffetFaust(buffer_size)
