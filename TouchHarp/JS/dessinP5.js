@@ -1,27 +1,14 @@
-var alphaEvolutif = 0;
+/*
+  * Fond d'écran de l'appliction géré via P5.js
+*/
+
+'use strict'
+
 var chargement = 0;
 var CentreL = 0;
 
-function setup(){
-  var myCanvas = createCanvas(windowWidth+500, windowHeight+500);
-  myCanvas.parent('fondEcran');
-  background(0);
-}
-
-function draw(){
-  fill("rgba(50, 0, 50, 0.3)");
-  rect(0,0, windowWidth+500, windowHeight+500);
-  frameRate(30);
-
-  if (chargement < 16 && chargement > -1) {
-    chargement++;
-  } else if (chargement > 15) {
-    audioReady();
-    chargement = -10;
-  }
-
-  // Cercle autour des noeuds
-
+// Affichage des cercles autour des noeuds en fonction de l'état et du volume du noeud
+function cercleVolume(){
   for(i = 0 ; i < nbNoeud ; i++){
     var posRefX = parseFloat($("#" + i).attr('data-x'))+50;
     var posRefY = parseFloat($("#" + i).attr('data-y'))+50;
@@ -31,9 +18,12 @@ function draw(){
     noStroke();
 
     fill(color);
-    ellipse(posRefX, posRefY, (100+volume*5),(100+volume*5));
+    ellipse(posRefX, posRefY, (100+volume*20),(100+volume*20));
   }
-  // Cercle autour de la tête
+}
+
+// Affichage du centre de la fenêtre en fonction du volume du métronome
+function centre(){
   strokeWeight(1);
   noFill();
   stroke('rgba(255, 255, 255, 0.8)');
@@ -63,9 +53,38 @@ function draw(){
 
   mouvement = mouvement+0.05;
   theta = theta+0.05;
-  //alphaEvolutif = alphaEvolutif+0.01;
 }
 
+/* Fonction de base de l'API P5.js */
+
+//Fnitialisation
+function setup(){
+  var myCanvas = createCanvas(windowWidth+500, windowHeight+500);
+  myCanvas.parent('fondEcran');
+  background(0);
+}
+
+// Fonction a executer à chaque frame
+function draw(){
+  fill("rgba(50, 0, 50, 0.3)");
+  rect(0,0, windowWidth+500, windowHeight+500);
+  frameRate(30);
+
+  //Le Asmjs étant long a charger, les images se ficge à l'initialisation.
+  //Une fois que les images deviennent fluides, la fonction audioReady est déclenché
+  if (chargement < 16 && chargement > -1) {
+      chargement++;
+    } else if (chargement > 15) {
+      audioReady();
+      chargement = -10;
+    }
+
+  cercleVolume();
+  centre();
+
+}
+
+// Fonction en cas de changement de taille de fenêtre.
 function windowResized() {
   resizeCanvas(windowWidth+500, windowHeight+500);
 }

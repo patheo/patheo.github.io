@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>--TouchHarp--</title>
+  <title>--TouchVoices--</title>
 
   <!-- Chargement des bibliothèques JS -->
   <meta charset="utf-8"  />
@@ -14,7 +14,6 @@
 </head>
 
 <body>
-<script src="JS/styleDial.js"></script>
 
 <!-- Initialisation des objets
 Les id correspondent au nom des objets Faust-->
@@ -29,10 +28,14 @@ Un Dial extérieur pour le Volume et un intérieur pour la vitesse-->
   <div id="MetSpeed">
     <input id="S"</input>
   </div>
+  <div id="GMetro">Reset</div>
 </div>
 
-<div id="HarpeNotes">
-  <input id="H"</input>
+<div id="Gen">
+  <div id="GenVol">
+    <input id="L"</input>
+  </div>
+  <div id="GHelp">Help</div>
 </div>
 
 <!-- Les Noeuds
@@ -40,8 +43,7 @@ Chaque noeud porte l'adressage suivant :
       <num> = numero du noeud
       <num> = numero de l'effet
       <mov ou vol> = paramètre édité
-
-    Pour les bontons = 0 1 2 3-->
+-->
 <!-- Noeud 0 -->
 <div id="0">
     <div id="00">0</div>
@@ -151,28 +153,32 @@ Chaque noeud porte l'adressage suivant :
 </div>
 
 <div id="loading">
-  <h1> Bienvenue sur la page Web du projet TouchVoices </h1>
+  <h1> Bienvenue sur la page Web du projet TouchHarp </h1>
   <p>La page est en chargement... Merci de patienter...<br><br>
     Profitons en pour présenter comment marche cet outil...<br>
-    En haut à gauche se trouve deux boutons qui gère le métronome de l'outil<br>
-    > le bouton interieur s'occupe de la vitesse<br>
-    > le bouton exterieur s'occupe du volume du metronome<br>
-    Le bouton présent dessous permet de changer les notes jouées par la harpe<br><br>
-    Ensuite il y a 6 "pastilles", c'est par là que le son de la harpe passe.<br>
-    En les deplaçant le son va se déplacer autour de la tête de l'auditeur...<br>
+    En haut à gauche se trouve trois boutons qui gèrent la harpe automatique de TouchHarp<br>
+    > le bouton intérieur s'occupe de la vitesse des notes<br>
+    > le bouton extérieur permet la selection des notes<br>
+    > le bouton reset permet de couper toutes les notes en cours (bouger à nouveau la selection de note pour le réactiver)<br><br>
+    En haut à droite se trouve un bouton pour le volume générale.<br>
+    Par défaut ce bouton est a zéro... N'hésitez pas à le monter si vous voulez du son !<br>
+    Le bouton help fait apparaître cette aide.<br><br>
+    Ensuite il y a 6 "pastilles", c'est par là que le son passe.<br>
+    En les déplaçant le son va se déplacer autour de la tête de l'auditeur...<br>
     Autour des "pastilles", il y a 4 boutons :<br>
-    Bouton 0 = La harpe est coupée<br>
+    Bouton 0 = La pastille est coupé<br>
     Bouton 1 = Le son de la harpe passe dans la pastille<br>
-    Bouton 2 = Le son est enregistré (attention cette fonction ne marche que sur le click)<br>
-    Bouton 3 = Le son enregistré est joué en boucle (attention cette fonction ne marche que sur le click)<br>
-    Bouton V = Permet l'affichage des modules d'effet<br><br>
+    Bouton 2 = Le son de la harpe est enregistré (attention cette fonction ne marche que sur la vitesse de la harpe)<br>
+    Bouton 3 = Le son enregistré est joué en boucle (attention cette fonction ne marche que sur la vitesse de la harpe)<br>
+    Bouton V = permet l'affichage des modules d'effet<br><br>
     Pour ce module il suffit de cliquer sur les ronds pour activer les effets puis<br>
-    de les deplacer dans le carré pour voir les modifications que cela fait.<br> <br>
-    Cet outil est en cours de developement est utilise des technologies en cours d'expérimentation <br>
+    de les déplacer dans le carré pour voir les modifications que cela fait.<br> <br>
+    Cet outil est en cours de dévelopement est utilise des technologies en cours d'experimentation <br>
     c'est pourquoi les temps de chargement peuvent être long et le son peut quelques fois se figer. <br><br>
     Projet realiser avec les bibliotheques Jquery.js, Interact.js et P5.js <br>
-    et la couche audio est réalisé grâce au language Faust.
+    et la couche audio est realise grace au language Faust.
   </p>
+  <div id="GClose">Close</div>
 </div>
 
 <script>
@@ -190,6 +196,7 @@ var vol = 10;
 
 //Mise en place des couleurs de bases
 
+// Tableau de couleur de fond des noeuds
 var colorBgd = new Array;
 colorBgd[0] = "rgba(255, 0, 125, 0.5)";
 colorBgd[1] = "rgba(125, 255, 0, 0.5)";
@@ -198,6 +205,7 @@ colorBgd[3] = "rgba(0, 255, 125, 0.5)";
 colorBgd[4] = "rgba(125, 0, 255, 0.5)";
 colorBgd[5] = "rgba(255, 125, 0, 0.5)";
 
+// Couleur des boutons d'actions (monitor, play, rec...)
 var colorButReset = "rgba(255, 255, 255, 0.3)";
 var colorBut = new Array;
 colorBut[0] = "rgba(255, 255, 255, 0.1)";
@@ -205,82 +213,23 @@ colorBut[1] = "rgba(0, 0, 255, 0.5)";
 colorBut[2] = "rgba(255, 0, 0, 0.5)";
 colorBut[3] = "rgba(0, 255, 0, 0.5)";
 
-// Définition de la chaine audio
-var effet1 = [0, 0, 0, 0, "Sat", "Mun", "Del", "Fil", "Rev"];
-var effet2 = [0, 0, 0, 0, "Fre", "Mun", "Res", "Rin", "Rev"];
-var effet = effet1;
+var effet = [0, 0, 0, 0, "Sat", 'Mun', "Del", "Fil", "Rev"];
+
 </script>
 
-<script src="JS/formatageDiv.js"></script>
-<script src="JS/interaction.js"></script>
-<script src="JS/dessinP5.js"></script>
-<script src="DSP/effetFaust.js"></script>
+<script src="JS/styleDial.js"></script>       <!-- Initialisation de la class dial -->
+<script src="JS/formatageDiv.js"></script>    <!-- Formatage automatique des div via jquery -->
+<script src="JS/interaction.js"></script>     <!-- Interaction via interact.js -->
+<script src="JS/dessinP5.js"></script>        <!-- Fond d'écran via P5.js -->
+<script src="DSP/effetFaust.js"></script>     <!-- Noeud audio Faust compilé grace à ASMJS -->
+<script src="JS/audio.js"></script>           <!-- Lancement de la webAudioAPI -->
 
 <script>
-// Dféfinition de la fonction de fermeture du Div de chargement
+// Définition de la fonction de fermeture du Div de chargement
 function audioReady(){
   console.log("READY !!");
-  $("#loading").fadeOut("slow");
+  $("#GClose").fadeIn("slow");
 }
-
-// Mise en place de l'audio
-var isWebKitAudio = (typeof (webkitAudioContext) !== "undefined");
-var audio_context = (isWebKitAudio) ? new webkitAudioContext() : new AudioContext();
-var effetFaust = null;
-var faustsvg = null;
-var dsp_code = null;
-
-function changeBufferSize(buffer_size)
-{
-    var new_buffer_size = buffer_size.options[buffer_size.selectedIndex].value;
-    console.log(new_buffer_size);
-    startNeweffetFaust(new_buffer_size);
-}
-
-
-function starteffetFaustAux(buffer_size)
-{
-    console.log("startAudioFX %d", buffer_size);
-    if (effetFaust) {
-        _f4u$t.hard_delete(faustsvg);
-        effetFaust.stop();
-        effetFaust.destroy();
-    }
-    effetFaust = faust.effetFaust(audio_context, buffer_size);
-    effetFaust.start();
-    console.log(effetFaust.json());
-    console.log(effetFaust.controls());
-}
-
-function starteffetFaust()
-{
-    starteffetFaustAux(256);
-}
-
-function startNeweffetFaust(buffer_size)
-{
-    starteffetFaustAux(buffer_size);
-}
-
-// To activate audio on iOS
-window.addEventListener('touchstart', function() {
-
-	// create empty buffer
-	var buffer = audio_context.createBuffer(1, 1, 22050);
-	var source = audio_context.createBufferSource();
-	source.buffer = buffer;
-
-	// connect to output (your speakers)
-	source.connect(audio_context.destination);
-
-	// play the file
-	source.noteOn(0);
-
-}, false);
-
-// General
-
-$(starteffetFaust);
 
 </script>
 

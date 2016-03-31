@@ -6,12 +6,8 @@ interact('.noeudMvt')
     onmove: function (event) {
       var target = event.target,
           parent = target.parentNode,
-              // keep the dragged position in the data-x/data-y attributes
           x = (parseFloat(parent.getAttribute('data-x')) || 0) + event.dx,
           y = (parseFloat(parent.getAttribute('data-y')) || 0) + event.dy;
-
-      /*parent.style.webkitTransform =
-        'translate(' + x + 'px, ' + y + 'px)';*/
 
       if(x > 0 && x < (windowWidth-100) && y > 0 && y < (windowHeight-100)){
 
@@ -45,7 +41,6 @@ interact('.buttonFixe')
         buttonAct = target.getAttribute('id').substr(1, 1);
 
     if(buttonAct == "V"){
-      //console.log("OK");
       if(etat == 0){
         $("#" + noeudAct + "Effect").fadeOut("slow");
         $("#" + target.getAttribute('id')).css("backgroundColor" , colorButReset);
@@ -54,6 +49,17 @@ interact('.buttonFixe')
         $("#" + target.getAttribute('id')).css("backgroundColor" , "rgba(255, 0, 125, 0.8)");
       }
       event.currentTarget.setAttribute('etat', etat);
+
+    } else if(buttonAct == "M"){
+      effetFaust.setValue("/0x00/VolV",  0);
+
+    } else if(buttonAct == "H"){
+      $("#GClose").fadeIn("slow");
+      $("#loading").fadeIn("slow");
+
+    } else if(buttonAct == "C"){
+      $("#loading").fadeOut("slow");
+
     } else {
       for (i = 0 ; i < 4 ; i++){
         $("#" + noeudAct + i).css("backgroundColor" , colorButReset);
@@ -79,8 +85,7 @@ interact('.effetMvt')
           y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
 
     if(x > 0 && x < 190 && y > 0 && y < 190){
-      /*target.style.webkitTransform =
-          'translate(' + x + 'px, ' + y + 'px)';*/
+
       target.style.transform =
           'translate(' + x + 'px, ' + y + 'px)';
       target.setAttribute("data-x", x);
@@ -103,7 +108,7 @@ interact('.effetMvt')
     } else {
       $("#" + target.getAttribute('id')).css("backgroundColor", colorBgd[noeudAct]);
     }
-    effetFaust.setValue("/0x00/" +effet[buttonAct]+ "B" + noeudAct, etat);
+    effetFaust.setValue("/0x00/" + effet[buttonAct] + "B" + noeudAct, etat);
     console.log(effet[buttonAct]+ "B" + noeudAct + " " + etat);
     event.currentTarget.setAttribute('etat', etat);
   })
