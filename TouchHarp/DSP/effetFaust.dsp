@@ -162,7 +162,7 @@ string(coef, freq, t60, level, trig) = noise*level
 		noise   		= random/2147483647.0;
 	};
 
-process = harpe(0.5,8,38) <: par(i, numDeNoeud, ((recorder(i) :
+process = harpe(0.5,8,38), (noise*0.001) :> _ <: par(i, numDeNoeud, ((recorder(i) :
                                satu(i) :
                                munger(i) :
                                smoothDelay(i) :
