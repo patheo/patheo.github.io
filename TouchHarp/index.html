@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>--TouchVoices--</title>
+  <title>--TouchHarp--</title>
 
   <!-- Chargement des bibliothèques JS -->
   <meta charset="utf-8"  />
@@ -229,6 +229,17 @@ var effet = [0, 0, 0, 0, "Sat", 'Mun', "Del", "Fil", "Rev"];
 function audioReady(){
   console.log("READY !!");
   $("#GClose").fadeIn("slow");
+  for(i=0 ; i<nbNoeud ; i++){
+    effetFaust.setValue("/0x00/MovX" + i, (parseFloat($("#" + i).attr('data-x')) + 50 - (windowWidth/2))/50);
+    console.log("/0x00/MovX" + i, (parseFloat($("#" + i).attr('data-x')) + 50 - (windowWidth/2))/50);
+    effetFaust.setValue("/0x00/MovY" + i, ((parseFloat($("#" + i).attr('data-y')) + 50 - (windowHeight/2))/50)*(-1));
+
+    for(idx=0 ; idx<6 ; idx++){
+      effetFaust.setValue("/0x00/" + effet[(idx+4)]+ "X" + i, parseFloat($("#" + i + (idx+4) + "Mov").attr('data-x')));
+      console.log("/0x00/" + effet[(idx+4)]+ "X" + i, parseFloat($("#" + i + (idx+4) + "Mov").attr('data-x')));
+      effetFaust.setValue("/0x00/" +  + effet[(idx+4)]+ "Y" + i, parseFloat($("#" + i + (idx+4) + "Mov").attr('data-y')));
+    }
+  }
 }
 
 </script>
