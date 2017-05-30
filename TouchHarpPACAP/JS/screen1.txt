@@ -1,0 +1,1 @@
+brightness, 2.;contrast, 2.;saturation, 2.;upper_right, 1.175 0.;lower_right, 1.149 0.835;lower_left, 0.28 0.918;upper_left, -0.369 0.268;

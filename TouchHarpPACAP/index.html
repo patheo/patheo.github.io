@@ -1,0 +1,248 @@
+<html>
+<head>
+  <title>--TouchHarp--</title>
+
+  <!-- Chargement des bibliothèques JS -->
+  <meta charset="utf-8"  />
+  <script src="JS/libary/jquery-2.1.4.min.js"></script>
+  <script src="JS/libary/interact.min.js"></script>
+  <script src="JS/libary/jquery.knob.min.js"></script>
+  <script src="JS/libary/p5.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="CSS/style.css" media="all"/>
+
+</head>
+
+<body>
+
+<!-- Initialisation des objets
+Les id correspondent au nom des objets Faust-->
+<div id="fondEcran" style="position:absolute; left:0px;top:0px"></div>
+
+<!-- Interface Métronome
+Un Dial extérieur pour le Volume et un intérieur pour la vitesse-->
+<div id="Met">
+  <div id="MetVol">
+    <input id="V"</input>
+  </div>
+  <div id="MetSpeed">
+    <input id="S"</input>
+  </div>
+  <div id="GMetro">Reset</div>
+</div>
+
+<div id="Gen">
+  <div id="GenVol">
+    <input id="L"</input>
+  </div>
+  <div id="GHelp">Help</div>
+</div>
+
+<!-- Les Noeuds
+Chaque noeud porte l'adressage suivant :
+      <num> = numero du noeud
+      <num> = numero de l'effet
+      <mov ou vol> = paramètre édité
+-->
+<!-- Noeud 0 -->
+<div id="0">
+    <div id="00">0</div>
+    <div id="01">1</div>
+    <div id="02">2</div>
+    <div id="03">3</div>
+    <div id="0View">V</div>
+  <div id="0Effect">
+    <div id="04Mov"></br>1</div>
+    <div id="05Mov"></br>2</div>
+    <div id="06Mov"></br>3</div>
+    <div id="07Mov"></br>4</div>
+    <div id="08Mov"></br>5</div>
+  </div>
+  <input id="0Vol"></input>
+  <div id="0Mov"></div>
+</div>
+
+<!-- Noeud 1 -->
+<div id="1">
+    <div id="10">0</div>
+    <div id="11">1</div>
+    <div id="12">2</div>
+    <div id="13">3</div>
+    <div id="1View">V</div>
+  <div id="1Effect">
+    <div id="14Mov"></br>1</div>
+    <div id="15Mov"></br>2</div>
+    <div id="16Mov"></br>3</div>
+    <div id="17Mov"></br>4</div>
+    <div id="18Mov"></br>5</div>
+  </div>
+  <input id="1Vol"></input>
+  <div id="1Mov"></div>
+</div>
+
+<!-- Noeud 2 -->
+<div id="2">
+    <div id="20">0</div>
+    <div id="21">1</div>
+    <div id="22">2</div>
+    <div id="23">3</div>
+    <div id="2View">V</div>
+  <div id="2Effect">
+    <div id="24Mov"></br>1</div>
+    <div id="25Mov"></br>2</div>
+    <div id="26Mov"></br>3</div>
+    <div id="27Mov"></br>4</div>
+    <div id="28Mov"></br>5</div>
+  </div>
+  <input id="2Vol"></input>
+  <div id="2Mov"></div>
+</div>
+
+<!-- Noeud 3 -->
+<div id="3">
+    <div id="30">0</div>
+    <div id="31">1</div>
+    <div id="32">2</div>
+    <div id="33">3</div>
+    <div id="3View">V</div>
+  <div id="3Effect">
+    <div id="34Mov"></br>1</div>
+    <div id="35Mov"></br>2</div>
+    <div id="36Mov"></br>3</div>
+    <div id="37Mov"></br>4</div>
+    <div id="38Mov"></br>5</div>
+  </div>
+  <input id="3Vol"></input>
+  <div id="3Mov"></div>
+</div>
+
+<!-- Noeud 4 -->
+<div id="4">
+    <div id="40">0</div>
+    <div id="41">1</div>
+    <div id="42">2</div>
+    <div id="43">3</div>
+    <div id="4View">V</div>
+  <div id="4Effect">
+    <div id="44Mov"></br>1</div>
+    <div id="45Mov"></br>2</div>
+    <div id="46Mov"></br>3</div>
+    <div id="47Mov"></br>4</div>
+    <div id="48Mov"></br>5</div>
+  </div>
+  <input id="4Vol"></input>
+  <div id="4Mov"></div>
+</div>
+
+<!-- Noeud 5 -->
+<div id="5">
+    <div id="50">0</div>
+    <div id="51">1</div>
+    <div id="52">2</div>
+    <div id="53">3</div>
+    <div id="5View">V</div>
+  <div id="5Effect">
+    <div id="54Mov"></br>1</div>
+    <div id="55Mov"></br>2</div>
+    <div id="56Mov"></br>3</div>
+    <div id="57Mov"></br>4</div>
+    <div id="58Mov"></br>5</div>
+  </div>
+  <input id="5Vol"></input>
+  <div id="5Mov"></div>
+</div>
+
+<div id="loading">
+  <h1> Bienvenue sur la page Web du projet TouchHarp </h1>
+  <p>La page est en chargement... Merci de patienter...<br><br>
+    Profitons-en pour présenter comment marche cet outil...<br>
+    En haut à gauche se trouvent trois boutons qui gèrent la harpe automatique de TouchHarp<br>
+    > le bouton intérieur s'occupe de la vitesse des notes<br>
+    > le bouton extérieur permet la sélection des notes<br>
+    > le bouton reset permet de couper toutes les notes en cours (bouger à nouveau la sélection de notes pour la réactiver)<br><br>
+    En haut à droite se trouve un bouton pour le volume général.<br>
+    Par défaut ce bouton est à zéro... N'hésitez pas à le monter si vous voulez du son !<br>
+    Le bouton help fait apparaître cette aide.<br><br>
+    Ensuite il y a 6 "pastilles", c'est par là que le son passe.<br>
+    En les déplaçant le son va se déplacer autour de la tête de l'auditeur...<br>
+    Autour des "pastilles", il y a 4 boutons :<br>
+    Bouton 0 = La pastille est coupée<br>
+    Bouton 1 = Le son de la harpe passe dans la pastille<br>
+    Bouton 2 = Le son de la harpe est enregistré (attention cette fonction marche avec la vitesse de la harpe)<br>
+    Bouton 3 = Le son enregistré est joué en boucle (attention cette fonction avec la vitesse de la harpe)<br>
+    Bouton V = permet l'affichage des modules d'effets<br><br>
+    Pour ce module, il suffit de cliquer sur les ronds pour activer les effets puis<br>
+    de les déplacer dans le carré pour voir les modifications que cela produit.<br> <br>
+    Cet outil est en cours de développement et utilise des technologies en cours d'expérimentation, <br>
+    c'est pourquoi les temps de chargement peuvent être longs et le son peut quelquefois se figer. <br><br>
+    Projet réalisé avec les bibliothèques Jquery.js, Interact.js et P5.js <br>
+    et la couche audio est réalisée grâce au language Faust.
+  </p>
+  <div id="GClose">Close</div>
+</div>
+
+<script>
+// Initialisation des attributs des Effets
+
+"use strict"
+
+var nbNoeud = 6;
+var mouvement = 0;
+var theta = 0;
+var i;
+var id;
+var idx;
+var vol = 10;
+
+//Mise en place des couleurs de bases
+
+// Tableau de couleur de fond des noeuds
+var colorBgd = new Array;
+colorBgd[0] = "rgba(255, 0, 125, 0.5)";
+colorBgd[1] = "rgba(125, 255, 0, 0.5)";
+colorBgd[2] = "rgba(0, 125, 255, 0.5)";
+colorBgd[3] = "rgba(0, 255, 125, 0.5)";
+colorBgd[4] = "rgba(125, 0, 255, 0.5)";
+colorBgd[5] = "rgba(255, 125, 0, 0.5)";
+
+// Couleur des boutons d'actions (monitor, play, rec...)
+var colorButReset = "rgba(255, 255, 255, 0.3)";
+var colorBut = new Array;
+colorBut[0] = "rgba(255, 255, 255, 0.1)";
+colorBut[1] = "rgba(0, 0, 255, 0.5)";
+colorBut[2] = "rgba(255, 0, 0, 0.5)";
+colorBut[3] = "rgba(0, 255, 0, 0.5)";
+
+var effet = [0, 0, 0, 0, "Sat", 'Mun', "Del", "Fil", "Rev"];
+
+</script>
+
+<script src="JS/styleDial.js"></script>       <!-- Initialisation de la class dial -->
+<script src="JS/formatageDiv.js"></script>    <!-- Formatage automatique des div via jquery -->
+<script src="JS/interaction.js"></script>     <!-- Interaction via interact.js -->
+<script src="JS/dessinP5.js"></script>        <!-- Fond d'écran via P5.js -->
+<script src="DSP/effetFaust.js"></script>     <!-- Noeud audio Faust compilé grace à ASMJS -->
+<script src="JS/audio.js"></script>           <!-- Lancement de la webAudioAPI -->
+
+<script>
+// Définition de la fonction de fermeture du Div de chargement
+function audioReady(){
+  console.log("READY !!");
+  $("#GClose").fadeIn("slow");
+  for(i=0 ; i<nbNoeud ; i++){
+    effetFaust.setValue("/0x00/MovX" + i, (parseFloat($("#" + i).attr('data-x')) + 50 - (windowWidth/2))/50);
+    console.log("/0x00/MovX" + i, (parseFloat($("#" + i).attr('data-x')) + 50 - (windowWidth/2))/50);
+    effetFaust.setValue("/0x00/MovY" + i, ((parseFloat($("#" + i).attr('data-y')) + 50 - (windowHeight/2))/50)*(-1));
+
+    for(idx=0 ; idx<6 ; idx++){
+      effetFaust.setValue("/0x00/" + effet[(idx+4)]+ "X" + i, parseFloat($("#" + i + (idx+4) + "Mov").attr('data-x')));
+      console.log("/0x00/" + effet[(idx+4)]+ "X" + i, parseFloat($("#" + i + (idx+4) + "Mov").attr('data-x')));
+      effetFaust.setValue("/0x00/" +  + effet[(idx+4)]+ "Y" + i, parseFloat($("#" + i + (idx+4) + "Mov").attr('data-y')));
+    }
+  }
+}
+
+</script>
+
+</body>
+</html>
