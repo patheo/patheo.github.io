@@ -1,0 +1,113 @@
+<html>
+  <head>   <!-- ouverture de la balise head, tout le code se situe dans le head (paramétrage site) et body  (codage site). dans le head information, contenu non affiché   -->
+    <meta charset="utf-8"  /> <!-- charset encodage des caractères -->
+    <meta name="keywords" content=""> <!--  mots cleés pour accéder au site, référencement de recherche -->
+    <meta name="descritpion" content="la page du web 101"> <!-- description de la page web -->
+
+    <title> --- Tours Soundpainting Orchestra --- </title> <!--   titre page -->
+
+    <link rel="stylesheet" href="style.css" /> <!-- systeme pour appeler le fichier css -->
+
+     <!-- Chanregement des librairie distantes -->
+    <script src="library/interact.min.js"></script>
+    <script src="library/jquery-2.1.4.min.js"></script>
+
+  </head>
+
+  <body>
+       <!-- Titre du site internet -->
+       <h1>Tours Soundpainting Orchestra</h1>
+       <h3 style="text-align : left">un ensemble dirigé par Angélique Cormier</h3>
+
+       <script>
+       // FONCTION DE TRAVAIL
+
+       // afficher pages
+       function showPage(id) {
+           for(i=0; i<pageList.length; i++){
+              $("#" + pageList[i][0] + "-page").fadeOut("slow");
+           }
+           $("#" + id + "-page").fadeIn("slow");
+       }
+
+       // afficher les titres
+       function showTitre(id) {
+          $("#" + id + "-titre").fadeIn("slow");
+       }
+
+       // effacer les titres
+       function hideTitre(id) {
+          $("#" + id + "-titre").fadeOut("slow");
+       }
+
+       // dimenssioner les icones
+       function dimIcone() {
+            $(".icone").height($(".icone").width());
+       }
+
+       // LISTE DES PAGES EN COURS
+       var pageList = [["popUp", "Pop Up"], ["leLion", "Le Lion"], ["sic", "S.I.C."], ["freet", "Collectif Free't"], ["cie", "La Compagnie"]];
+
+      // Création des pages
+       for (var i = 0 ; i < pageList.length ; i++) {
+            // Div de fond
+            $('<div>', {
+                 'class' : 'icone',
+                 id : pageList[i][0],
+                 click: function(e){
+                      showPage(this.id);
+                 },
+                 mouseover: function(e) {
+                      showTitre(this.id);
+                 },
+                 mouseout: function(e) {
+                      hideTitre(this.id);
+                 }
+            }).appendTo(document.body);
+
+            // Image
+            $('<img>', {
+                 'src' : "pages/" + pageList[i][0] + "/icone.jpg",
+                 'class' : 'iconeImage',
+                 id : pageList[i][0] + "-image"
+            }).appendTo("#" + pageList[i][0]);
+
+            // Titre
+            $('<div>', {
+                 'class' : 'iconeTitre',
+                 id : pageList[i][0] + "-titre",
+                 text : pageList[i][1]
+                 }
+            ).appendTo("#" + pageList[i][0]);
+
+            // Div pour tenir la page
+            $('<div>', {
+                 'class' : 'page',
+                 id : pageList[i][0] + "-page",
+                 }
+            )
+            .load("pages/" + pageList[i][0] + "/index.html")
+            .appendTo(document.body);
+
+            // création de l'objet page
+            $('<object>', {
+                 'type' : "text/html",
+                 'data' : "pages/" + pageList[i][0] + "/index.html"
+            }).appendTo("#" + pageList[i][0] + "-page");
+       }
+
+       dimIcone();
+       $(window).resize(dimIcone());
+
+       </script>
+
+       <p style="text-align : center">
+            <br>
+            Bienvenue sur le site du TSO. <br>
+            <br>
+            Retourvez sur ce site tous nos projets en cours <br>
+            <br>
+            Pour le d'informations sur nos actualités n'hésitez pas à consulter notre page facebook.
+       </p>
+  </body>
+</html>
