@@ -16,18 +16,15 @@
 
   <body>
        <!-- Titre du site internet -->
-       <h1>Tours Soundpainting Orchestra</h1>
-       <h3 style="text-align : left">un ensemble dirigé par Angélique Cormier</h3>
+       <h1 id = "siteTitre">Tours Soundpainting Orchestra</h1>
+       <h3 style="text-align : left" id = "siteSousTitre">un ensemble dirigé par Angélique Cormier</h3>
 
        <script>
        // FONCTION DE TRAVAIL
 
        // afficher pages
        function showPage(id) {
-           for(i=0; i<pageList.length; i++){
-              $("#" + pageList[i][0] + "-page").fadeOut("slow");
-           }
-           $("#" + id + "-page").fadeIn("slow");
+           $("#corpText").load("pages/" + id + "/index.html");
        }
 
        // afficher les titres
@@ -43,6 +40,8 @@
        // dimenssioner les icones
        function dimIcone() {
             $(".icone").height($(".icone").width());
+            $(".page").css('position', 'inherit');
+            //console.log($("#siteTitre").height());
        }
 
        // LISTE DES PAGES EN COURS
@@ -80,34 +79,14 @@
                  }
             ).appendTo("#" + pageList[i][0]);
 
-            // Div pour tenir la page
-            $('<div>', {
-                 'class' : 'page',
-                 id : pageList[i][0] + "-page",
-                 }
-            )
-            .load("pages/" + pageList[i][0] + "/index.html")
-            .appendTo(document.body);
-
-            // création de l'objet page
-            $('<object>', {
-                 'type' : "text/html",
-                 'data' : "pages/" + pageList[i][0] + "/index.html"
-            }).appendTo("#" + pageList[i][0] + "-page");
        }
 
        dimIcone();
-       $(window).resize(dimIcone());
+       window.onresize = dimIcone;
 
        </script>
 
-       <p style="text-align : center">
-            <br>
-            Bienvenue sur le site du TSO. <br>
-            <br>
-            Retourvez sur ce site tous nos projets en cours <br>
-            <br>
-            Pour le d'informations sur nos actualités n'hésitez pas à consulter notre page facebook.
-       </p>
+       <div id="corpText" class="page"></div>
+
   </body>
 </html>

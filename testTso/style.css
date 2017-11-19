@@ -43,16 +43,12 @@ h1 {
 }
 
 .page {
-
-     position: absolute;
-     margin-top: 200px;
+     position:inherit;
      margin-left: 10%;
      margin-right: 10%;
-
      text-align: justify;
      font-family: "Impact";
      color: black;
-  display: none;
 }
 
 iframe {
