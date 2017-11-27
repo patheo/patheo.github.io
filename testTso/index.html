@@ -54,6 +54,7 @@
        // LISTE DES PAGES EN COURS
        var pageList = [["popUp", "Pop Up"], ["leLion", "Le Lion"], ["sic", "S.I.C."], ["freet", "Collectif Free't"], ["cie", "La Compagnie"]];
 
+       $('#siteTitre').click(function(){showPage("home")});
       // Création des pages
        for (var i = 0 ; i < pageList.length ; i++) {
             // Div de fond
@@ -95,5 +96,8 @@
 
        <div id="corpText" class="page"></div>
 
+       <script>
+       showPage("home");
+       </script>
   </body>
 </html>
