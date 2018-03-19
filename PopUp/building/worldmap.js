@@ -57,7 +57,7 @@ function mousePressed() {
           var city = myMap.latLngToPixel(data[i].mapX, data[i].mapY);
           if(dist(mouseX, mouseY, city.x, city.y) < 10) {
 
-               window.location = "/"+data[i].folder+"/index.html";
+               window.location = data[i].folder;
                break;
 
           }
