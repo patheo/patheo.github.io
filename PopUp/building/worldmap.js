@@ -44,6 +44,7 @@ function draw(){
 
           scribble.scribbleEllipse(city.x, city.y, 10, 10);
 
+
           if(dist(mouseX, mouseY, city.x, city.y) < 50) {
 
           }
