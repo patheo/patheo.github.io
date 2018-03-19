@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <title>Pop Up - jeu de piste artistique</title>
+          <!-- travail uniquement sur la version FR pour le moment -->
+          <!-- Style Css a modifier en cas d'écran de téléphone-->
+          <link rel="stylesheet" href="/style/desktopStyle.css" />
+
+          <!-- Différentes bibliothèques -->
+          <script src="../../library/jquery-2.1.4.min.js"></script>
+          <script src="../../library/p5.min.js"></script>
+          <script src="../../library/p5.dom.min.js"></script>
+          <script src="../../library/p5.play.js"></script>
+          <script src="../../library/p5.scribble.js"></script>
+
+     </head>
+
+     <body>
+          <script>
+
+               // Données pour les performances
+               var data = [{}];
+
+
+
+
+          </script>
+          <div id="lang" style="display: flex; width: 100%; justify-content: flex-end; position: absolute">
+               <h1 onclick="translateFr()"> Fr </h1>
+               <h1 onclick="translateEng()"> Eng </h1>
+          </div>
+          <div id="menu" style="display: flex; margin-left: 100px">
+               <a href="../worldmap.html"> La carte </a>
+               <a href="../story.html"> L'histoire </a>
+               <a> Accès pro </a>
+               <a> Contacts </a>
+          </div>
+
+          <div id="info" style="display: none; width: 1000px; height: 700px">
+               <div style="width: 20px; height: 20px; position:absolute; left: 110px; top: 60px" onclick="closeInfo()">
+                    <img src="../x.png" style="width: 100%; height: 100%"> </img>
+               </div>
+               <h2 id="titre" style="text-align: center ; margin-top: 100px"></h2>
+
+               <div id="table" style="display: flex; justify-content: center; margin-left: auto; margin-right : auto; width:700px; margin-top : 10px; height: 600px" >
+                    <div id="texte" style="overflow-y: scroll; text-overflow: normal; margin:10px; text-align: justify">
+                    </div>
+
+                    <div id="image" style="vertical-align: middle; margin:10px">
+
+                    </div>
+               </div>
+          </div>
+
+          <script src="../../js/citymap.js"></script>
+
+          <script> $("#img").attr('src', 'ghost.jpg'); </script>
+
+     </body>
+</html>
