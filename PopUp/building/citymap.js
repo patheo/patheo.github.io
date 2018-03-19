@@ -66,7 +66,7 @@ function mousePressed() {
                }
                if(data[i].video) {
                     $("#image").append("<iframe id='img' width='420' height='315' src=" + data[i].video +
-                    "allowfullscreen></iframe>");
+                    "></iframe>");
                }
 
 
