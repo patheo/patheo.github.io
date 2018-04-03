@@ -1,0 +1,161 @@
+@font-face {
+	font-family: 'MinionPro';
+	src: url('Minion_Pro_Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Typew';
+	src: url('typewcond_regular.otf');
+}
+
+body {
+     margin: 0px;
+	font-family: 'MinionPro';
+}
+
+h1{
+
+	font-family: 'Typew';
+     font-size: 70px;
+	margin: 0px;
+	font-weight : 2;
+	width : 100%;
+	height : 100%;
+	/*letter-spacing: -3px;*/
+	text-transform: uppercase;
+	color : rgb(255, 255, 255);
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+     transform: scale(0.7, 1.5);
+}
+
+h2{
+
+	font-family: 'Typew';
+     font-size: 25px;
+	font-weight : 2;
+	width : 100%;
+	text-transform: uppercase;
+	color : rgb(93, 163, 52);
+	text-align: center;
+	display: inline-block;
+     transform: scale(0.7, 1.5);
+
+}
+
+h3{
+
+	font-family: 'Typew';
+     margin : 10px;
+     font-size: 20px;
+	color : rgb(93, 163, 52);
+	text-align : center;
+
+}
+
+h4{
+
+	font-family: 'Typew';
+	color : rgb(93, 163, 52);
+	display:inline;
+
+}
+
+a {
+
+	font-family: 'Typew';
+     font-size: 20px;
+	font-weight : 2;
+	margin : 30px;
+	letter-spacing: -2px;
+	color : rgb(93, 163, 52);
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* unvisited link */
+a:link {
+    color : rgb(93, 163, 52);
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+	color : rgb(143, 213, 102);
+     text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+	color : rgb(130, 194, 59);
+     text-decoration: underline;
+}
+
+/* selected link */
+a:active {
+	color : rgb(93, 163, 52);
+     text-decoration: underline;
+}
+
+#entete {
+	position: absolute;
+	background: rgb(130, 194, 59);
+	width:200px;
+	height:100px
+}
+
+#menu {
+	position: absolute;
+	background : linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+	left: 200px;
+	width: calc(100% - 200px);
+	height:100px;
+	display : flex;
+}
+
+#border {
+	position: absolute;
+	top: 100px;
+	width: 200px;
+	height : calc(100% - 100px);
+	background : linear-gradient(rgba(130,194,59,1), rgba(130,194,59,0), rgba(130,194,59,0));
+}
+
+#container {
+	position: absolute !important;;
+	height:100%;
+	width:100%;
+	z-index:-100;
+}
+
+.divInside {
+	position:absolute;
+	background: white;
+	margin-left: 250px;
+	margin-right: 50px;
+	margin-top: 100px;
+	margin-bottom: 50px;
+	padding : 20px;
+	width : calc(88% - 300px);
+	max-height: calc(100% - 150px);
+	border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+	border: 1px solid black;
+	display: none;
+}
+
+.rect{
+
+	border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+	border: 1px solid black;
+  	content: '';
+  	position:absolute;
+  	width:100%;
+  	height:100%;
+
+}
+
+
+/*
+ Style du texte
+*/

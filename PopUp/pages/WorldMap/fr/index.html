@@ -1,0 +1,145 @@
+
+<!DOCTYPE HTML>
+
+<html>
+     <head>
+          <title>Pop Up : Map</title>
+          <meta charset="utf-8"  /> <!-- charset encodage des caractères -->
+          <meta name="keywords" content=""> <!--  mots cleés pour accéder au site, référencement de recherche -->
+          <script src="../../../library/jquery-3.3.1.min.js"></script>
+          <script src="../../../library/WebGlEarth.js"></script>
+          <link rel="stylesheet" href="../../../style/desktopStyleSimple.css" /> <!-- systeme pour appeler le fichier css -->
+
+          <script>
+
+               // Données de travail
+
+               var legende = {
+                    "titre" : "Légende",
+                    "soustitre" : "Pour zoomer, utiliser votre molette ! Chaque ville où Pop Up est passée ou passera est indiquée sur cette carte. Chaque couleur représente un type de spectacle donc voici la légende :"
+               }
+
+               var data = [{
+                    "nom" : "Centre-ville - Saint Pierre des Corps",
+                    "mapX" : 47.394,
+                    "mapY" : 0.684,
+                    "type" : "ecriture",
+                    "date" : "Juin 2017",
+                    "folder" : "../CentreVille-StPierre/fr"
+               },
+               {
+                    "nom" : "Saint Henry - Marseille",
+                    "mapX" : 43.3,
+                    "mapY" : 5.4,
+                    "type" : "residence",
+                    "date" : "Octobre 2018",
+                    "folder" : "../StHenry-Marseille/fr"
+               },{
+                    "nom" : "Belle Beille - Angers",
+                    "mapX" : 47.47,
+                    "mapY" : -0.59,
+                    "type" : "avenir",
+                    "date" : "Septembre 2018",
+                    "folder" : "../BelleBeille-Angers/"
+               },{
+                    "nom" : "Brooklyn - New York",
+                    "mapX" : 40.64,
+                    "mapY" : -73.94,
+                    "type" : "avenir",
+                    "date" : "Juin 2019",
+                    "folder" : "../Brooklyn-NewYork/fr"
+               },{
+                    "nom" : "Les deux lions - Tours",
+                    "mapX" : 47.36,
+                    "mapY" : 0.67,
+                    "type" : "avenir",
+                    "date" : "Septembre 2018",
+                    "folder" : "../LesDeuxLions-Tours/fr"
+               },{
+                    "nom" : "Collège Jean Rostand - Saint-Germain-du-Puy",
+                    "mapX" : 47.10,
+                    "mapY" : 2.48,
+                    "type" : "avenir",
+                    "date" : "Mai 2019",
+                    "folder" : "../JeanRostand-StGermainDuPuy/fr"
+               }];
+
+
+               // Chargement des pages distantes
+               $(function(){
+                    $("#menu").load("../../Global/fr/menu.html" );
+               });
+          </script>
+
+     </head>
+     <body>
+
+
+
+          <div id="entete">
+               <h1> Pop up </h1>
+          </div>
+
+          <div id="container"></div>
+
+          <div id="menu"></div>
+
+
+
+
+
+          <div id="border">
+               <h2> Légende </h2>
+               <div style="margin: 5px">
+                    Vous trouverez sur cette carte tous les lieux où <h4> POP UP </h4> est passé et où il passera.<br>
+                    Chaque couleur indique un type de spectacle différent, voici les explications :
+               </div>
+               <img src="../src/PickGreen.png" style="float: left; margin : 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Résidence de travail </div>
+               <img src="../src/PickGrey.png" style="float: left; margin : 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Vos <h4> POP UP </h4> </div>
+               <img src="../src/PickRed.png" style="float: left; margin: 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Spectacle </div>
+               <img src="../src/PickViolet.png" style="float: left; margin : 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Spectacle à venir </div>
+               <img src="../src/PickYellow.png" style="float: left; margin: 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Résidence d'écriture </div>
+
+
+               <div style="background: rgba(255, 255, 255, 0.5)">
+                    <div style="display : flex">
+                         <h3 onclick="zoomIn();" style="width : 100%"> + </h3>
+                         <h3 onclick="resetZoom()"> Zoom </h3>
+                         <h3 onclick="zoomOut()" style="width : 100%"> - </h3>
+                    </div>
+                    <div style="font-size : 10px; text-align: center; margin : 5%; margin-top : -10px ; margin-bottom : 100px"> Pour zoomer vous pouvez aussi utliser la molette de la souris.</div>
+               </div>
+          </div>
+
+          <script src="../../../building/worldmap.js"></script>
+
+          <script>
+
+               function zoomIn() {
+
+                    earth.setZoom(earth.getZoom() + 0.5);
+
+               }
+
+               function zoomOut() {
+
+                    earth.setZoom(earth.getZoom() - 0.5);
+
+               }
+
+               function resetZoom() {
+
+                    earth.setZoom(2);
+
+               }
+
+          </script>
+
+
+     </body>
+</html>
