@@ -1,0 +1,68 @@
+
+<!DOCTYPE HTML>
+
+<html>
+     <head>
+          <title>Pop Up : Map</title>
+          <meta charset="utf-8"  /> <!-- charset encodage des caractères -->
+          <meta name="keywords" content=""> <!--  mots cleés pour accéder au site, référencement de recherche -->
+          <script src="library/jquery-3.3.1.min.js"></script>
+          <link rel="stylesheet" href="style/desktopStyleSimple.css" /> <!-- systeme pour appeler le fichier css -->
+
+          <script>
+
+               var datamenu = ["fr", ["La Carte", "WorldMap"], ["Le spectacle", "History"], ["Pro", "History"], ["Contact", "contact"]];
+               // Chargement des pages distantes
+               for(i = 1 ; i < datamenu.length ; i++) {
+
+                    a = document.createElement('a');
+                    $(a).attr('href', "pages/" + datamenu[i][1] + "/" + datamenu[0])
+                         .text(datamenu[i][0])
+                         .appendTo("#menu");
+
+               }
+
+          </script>
+
+     </head>
+     <body>
+
+
+
+          <div id="entete">
+               <h1> Pop up </h1>
+          </div>
+
+          <div id="container"></div>
+
+          <div id="menu"></div>
+
+          <script>
+
+               var datamenu = ["fr", ["La Carte", "WorldMap"], ["Le spectacle", "History"], ["Pro", "History"], ["Contact", "contact"]];
+               // Chargement des pages distantes
+               for(i = 1 ; i < datamenu.length ; i++) {
+
+                    a = document.createElement('a');
+                    $(a).attr('href', "pages/" + datamenu[i][1] + "/" + datamenu[0])
+                         .text(datamenu[i][0])
+                         .appendTo("#menu");
+
+               }
+
+          </script>
+
+
+
+          <div id="border">
+               <h2> Légende </h2>
+               <div style="margin: 5px">
+                    Boienvenue sur le site du  <h4> POP UP </h4><br>
+                    Ce site est en construction. Pour le moment, seul une partie est active...
+               </div>
+
+          </div>
+
+
+     </body>
+</html>

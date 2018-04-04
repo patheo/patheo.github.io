@@ -65,8 +65,8 @@ for (i = 0 ; i < data.length ; i++) {
                'width' : data[i].largeur,
                'height' : data[i].hauteur,
                'position' : 'absolute',
-               'left' : data[i].mapX - data[i].largeur/2,
-               'top' : data[i].mapY - data[i].hauteur/2
+               'left' : data[i].mapX,
+               'top' : data[i].mapY
           })
           .attr("perfId" , data[i].id)
           .attr("class", "drawbox")
@@ -125,9 +125,10 @@ for (i = 0 ; i < data.length ; i++) {
           $(document.createElement('iframe'))
                .attr("src", data[i].video)
                .css({
-                    "width": "50%",
+                    "width": "70%",
                     "height": "500px",
-                    "margin": "5%"
+                    "margin-left" : "15%",
+                    "margin-right" : "15%"
                })
                .appendTo(dinfo)
 
@@ -135,97 +136,40 @@ for (i = 0 ; i < data.length ; i++) {
 
 }
 
-/*
+zoom($("#border"));
 
-var img, pg, pgText, canvas;
-var scribble = new Scribble();
-var data;
-var mouseDist = 50;
-var article = false;
+$(function(){
+     $("#menu").load("../../Global/fr/menu.html" );
+});
 
-function preload() {
-     img = loadImage('plan.jpg');
-}
+$("#plan").panzoom({
+     minScale: 0.5,
+     startTransform: 'scale(1)',
+     increment : 0.01
+});
 
-function setup() {
+ $("#plan").on('mousewheel.focal', function( e ) {
+     e.preventDefault();
+     var delta = e.delta || e.originalEvent.wheelDelta;
+     var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+     $("#plan").panzoom('zoom', zoomOut, {
+          animate: false,
+          focal: e
+     });
+   });
 
-     //$("img").fadeOut("fast");
-     canvas = createCanvas(1000, 700);
-     canvas.position(0, 50);
-     canvas.style('z-index', '-1');
+   function zoomIn() {
+        for(i = 0 ; i < 20 ; i++){
+             $("#plan").panzoom('zoom', false, {
+                  animate: true
+             });
+        }
+   }
 
-     pgText = createGraphics(width, height);
-     pg = createGraphics(width, height);
-
-     pg.tint(255, 20);
-     pg.image(img, 0, 0, width, height);
-
-     noFill();
-
-}
-
-function draw() {
-
-     // Dessin de la carte avec un fond alpha
-     image(pg, 0, 0);
-
-     // Cercle autours des éléments importants
-     for( i = 0 ; i < data.length ; i++) {
-
-          if(dist(data[i].mapX, data[i].mapY, mouseX, mouseY) < mouseDist){
-               stroke(0);
-               scribble.scribbleEllipse(data[i].mapX,
-                                        data[i].mapY,
-                                        data[i].diam + cos(frameCount/20.)*4,
-                                        data[i].diam + cos(frameCount/19.)*4);
-          }
-
-     }
-
-     if(article) {
-
-          //fill("rgba(255, 255, 255, 0.8)")
-          noStroke();
-          fill("rgba(255, 255, 255, .9)");
-          rect(100, 50, 800, 600);
-          stroke(0);
-          scribble.scribbleRect(500, 350, 800, 600);
-
-     }
-}
-
-function mousePressed() {
-     for( i = 0 ; i < data.length ; i++) {
-
-          if(dist(data[i].mapX, data[i].mapY, mouseX, mouseY) < mouseDist){
-               $("#titre").text(data[i].titre);
-               $("#texte").text(data[i].description);
-               if(data[i].image) {
-                    $("#image").append("<img id='img' src=" + data[i].image + " style='width:100%'></img>");
-               }
-               if(data[i].video) {
-                    $("#image").append("<iframe id='img' width='420' height='315' src=" + data[i].video +
-                    "></iframe>");
-               }
-
-
-               article = true;
-               $("#info").fadeIn("slow");
-
-               noLoop();
-               break;
-          }
-
-     }
-
-}
-
-function closeInfo() {
-
-     $("#info").fadeOut("slow");
-     $('#img').remove();
-     article = false;
-     loop();
-
-}
-*/
+   function zoomOut() {
+        for(i = 0 ; i < 20 ; i++){
+             $("#plan").panzoom('zoom', true, {
+                  animate: true
+             });
+        }
+   }

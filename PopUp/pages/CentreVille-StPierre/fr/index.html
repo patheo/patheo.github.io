@@ -18,37 +18,37 @@
 
                // Données pour les performances
                var data = [{
-                         "titre" : "Requiem for a Ghost",
-                         "description" : "Isdem diebus Apollinaris Domitiani gener, paulo ante agens palatii Caesaris curam, ad Mesopotamiam missus a socero per militares numeros immodice scrutabatur, an quaedam altiora meditantis iam Galli secreta susceperint scripta, qui conpertis Antiochiae gestis per minorem Armeniam lapsus Constantinopolim petit exindeque per protectores retractus artissime tenebatur.",
-                         "video" : "https://www.youtube.com/embed/Pz4UHI5wnVA",
-                         "accroche" : "Pour 12h51, cherchez le fantome epicurien.",
-                         "mapX" : 858,
-                         "mapY" : 157,
-                         "largeur" : 50,
-                         "hauteur" : 100,
-                         "id" : "ghost"
+                         "titre" : "Tango",
+                         "description" : "Haec igitur prima lex amicitiae sanciatur, ut ab amicis honesta petamus, amicorum causa honesta faciamus, ne exspectemus quidem, dum rogemur; studium semper adsit, cunctatio absit; consilium vero dare audeamus libere. Plurimum in amicitia amicorum bene suadentium valeat auctoritas, eaque et adhibeatur ad monendum non modo aperte sed etiam acriter, si res postulabit, et adhibitae pareatur.",
+                         "image" : "tango.jpg",
+                         "accroche" : "Pour 11h44, cherchez les deux danseuses de tango.",
+                         "mapX" : '8%',
+                         "mapY" : '26%',
+                         "largeur" : '10%',
+                         "hauteur" : '15%',
+                         "id" : "tango"
+
                     },{
                          "titre" : "Percu",
                          "description" : "Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus, reverteris ad paria perferenda, nec ubi esses interrogatus et quo tandem miser discesseris, aetatem omnem frustra in stipite conteres summittendo.",
                          "image" : "percu.jpg",
                          "accroche" : "Pour 12h23, cherchez les Tour de France Miniature.",
-                         "mapX" : 314,
-                         "mapY" : 523,
-                         "largeur" : 110,
-                         "hauteur" : 100,
+                         "mapX" : '25%',
+                         "mapY" : '66%',
+                         "largeur" : '12%',
+                         "hauteur" : '11%',
                          "id" : "percu"
 
                     },{
-                         "titre" : "Tango",
-                         "description" : "Haec igitur prima lex amicitiae sanciatur, ut ab amicis honesta petamus, amicorum causa honesta faciamus, ne exspectemus quidem, dum rogemur; studium semper adsit, cunctatio absit; consilium vero dare audeamus libere. Plurimum in amicitia amicorum bene suadentium valeat auctoritas, eaque et adhibeatur ad monendum non modo aperte sed etiam acriter, si res postulabit, et adhibitae pareatur.",
-                         "image" : "tango.jpg",
-                         "accroche" : "Pour 11h44, cherchez les deux danseuses de tango.",
-                         "mapX" : 170,
-                         "mapY" : 277,
-                         "largeur" : 100,
-                         "hauteur" : 130,
-                         "id" : "tango"
-
+                              "titre" : "Requiem for a Ghost",
+                              "description" : "Isdem diebus Apollinaris Domitiani gener, paulo ante agens palatii Caesaris curam, ad Mesopotamiam missus a socero per militares numeros immodice scrutabatur, an quaedam altiora meditantis iam Galli secreta susceperint scripta, qui conpertis Antiochiae gestis per minorem Armeniam lapsus Constantinopolim petit exindeque per protectores retractus artissime tenebatur.",
+                              "video" : "https://www.youtube.com/embed/Pz4UHI5wnVA",
+                              "accroche" : "Pour 12h51, cherchez le fantome epicurien.",
+                              "mapX" : '83%',
+                              "mapY" : '18%',
+                              "largeur" : '6%',
+                              "hauteur" : '10%',
+                              "id" : "ghost"
                     }];
 
 
@@ -70,69 +70,11 @@
 
             <div id="menu"></div>
 
-            <div id="border">
+            <div id="border"></div>
 
-                 <!--
-                 <div style="background: rgba(255, 255, 255, 0.5)">
-                     <div style="display : flex">
-                          <h3 onclick="zoomIn();" style="width : 100%"> + </h3>
-                          <h3 onclick="resetZoom()"> Zoom </h3>
-                          <h3 onclick="zoomOut()" style="width : 100%"> - </h3>
-                     </div>
-                     <div style="font-size : 10px; text-align: center; margin : 5%; margin-top : -10px ; margin-bottom : 100px"> Pour zoomer vous pouvez aussi utliser la molette de la souris.</div>
-                </div>
-           -->
-            </div>
-
-            <div id="container">
-
-                 <!--<img id="imgPh" src="../src/plan.jpg" style="position: absolute; height:100%; display: block; margin-left: auto; margin-right: auto;">-->
-
-            </div>
+            <div id="container"> </div>
 
             <script src="../../../building/citymap.js"></script>
-
-            <script>
-
-            zoom($("#border"));
-
-            $(function(){
-                 $("#menu").load("../../Global/fr/menu.html" );
-            });
-
-            $("#plan").panzoom({
-                 minScale: 0.5,
-                 startTransform: 'scale(0.7)',
-                 increment : 0.03
-            });
-
-             $("#plan").on('mousewheel.focal', function( e ) {
-                 e.preventDefault();
-                 var delta = e.delta || e.originalEvent.wheelDelta;
-                 var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-                 $("#plan").panzoom('zoom', zoomOut, {
-                      animate: false,
-                      focal: e
-                 });
-               });
-
-               function zoomIn() {
-                    for(i = 0 ; i < 20 ; i++){
-                         $("#plan").panzoom('zoom', false, {
-                              animate: true
-                         });
-                    }
-               }
-
-               function zoomOut() {
-                    for(i = 0 ; i < 20 ; i++){
-                         $("#plan").panzoom('zoom', true, {
-                              animate: true
-                         });
-                    }
-               }
-
-            </script>
 
 
      </body>

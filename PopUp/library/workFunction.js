@@ -2,7 +2,13 @@ function zoom(parent) {
 
      var zoomContent = $(document.createElement('div'));
      $(zoomContent)
-                    .css("background", "rgba(255, 255, 255, 0.5)")
+                    .css({
+                         "position" : 'absolute',
+                         "background" : "rgba(255, 255, 255, 0.5)",
+                         "top" : 'calc( 100% - 80px)',
+                         "width" : "200px",
+                         "height" : '80px'
+                    })
                     .appendTo(parent)
 
      var array = $(document.createElement('div'));
@@ -11,8 +17,11 @@ function zoom(parent) {
                .appendTo(zoomContent)
 
      $(document.createElement('h3'))
-               .css("width", "100%")
-               .click(zoomOut())
+               .css({
+                    "width": "100%",
+                    "cursor" : "zoom-out"
+               })
+               .click(zoomOut)
                .text("-")
                .appendTo(array)
 
@@ -22,8 +31,11 @@ function zoom(parent) {
                .appendTo(array)
 
      $(document.createElement('h3'))
-               .css("width", "100%")
-               .click(zoomIn())
+               .css({
+                    "width": "100%",
+                    "cursor" : "zoom-in"
+               })
+               .click(zoomIn)
                .text("+")
                .appendTo(array)
 
@@ -31,8 +43,7 @@ function zoom(parent) {
                .css({"font-size" : "10px",
                     "text-align" : "center",
                     "margin" : "5%",
-                    "margin-top" : "-10px",
-                    "margin-bottom" : "100px"})
+                    "margin-top" : "-10px"})
                .text("Pour zoomer vous pouvez aussi utliser la molette de la souris.")
                .appendTo(zoomContent)
 

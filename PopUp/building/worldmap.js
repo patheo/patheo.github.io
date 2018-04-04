@@ -62,3 +62,24 @@ $('.we-pm-icon').each(function(){
 });
 
 $("#legende").appendTo("#boder");
+
+function zoomIn() {
+
+     earth.setZoom(earth.getZoom() + 0.5);
+
+}
+
+function zoomOut() {
+
+     earth.setZoom(earth.getZoom() - 0.5);
+
+}
+
+function resetZoom() {
+
+     earth.setZoom(2);
+
+
+}
+
+zoom($("body"));

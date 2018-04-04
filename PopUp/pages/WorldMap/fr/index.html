@@ -8,6 +8,7 @@
           <meta name="keywords" content=""> <!--  mots cleés pour accéder au site, référencement de recherche -->
           <script src="../../../library/jquery-3.3.1.min.js"></script>
           <script src="../../../library/webGlEarth.js"></script>
+          <script src="../../../library/workFunction.js"></script>
           <link rel="stylesheet" href="../../../style/desktopStyleSimple.css" /> <!-- systeme pour appeler le fichier css -->
 
           <script>
@@ -105,40 +106,10 @@
                <img src="../src/PickYellow.png" style="float: left; margin: 5px">
                <div style="line-height:60px ; width : 100%; margin-left : 50px"> Résidence d'écriture </div>
 
-
-               <div style="background: rgba(255, 255, 255, 0.5)">
-                    <div style="display : flex">
-                         <h3 onclick="zoomIn();" style="width : 100%"> + </h3>
-                         <h3 onclick="resetZoom()"> Zoom </h3>
-                         <h3 onclick="zoomOut()" style="width : 100%"> - </h3>
-                    </div>
-                    <div style="font-size : 10px; text-align: center; margin : 5%; margin-top : -10px ; margin-bottom : 100px"> Pour zoomer vous pouvez aussi utliser la molette de la souris.</div>
-               </div>
           </div>
 
           <script src="../../../building/worldmap.js"></script>
 
-          <script>
-
-               function zoomIn() {
-
-                    earth.setZoom(earth.getZoom() + 0.5);
-
-               }
-
-               function zoomOut() {
-
-                    earth.setZoom(earth.getZoom() - 0.5);
-
-               }
-
-               function resetZoom() {
-
-                    earth.setZoom(2);
-
-               }
-
-          </script>
 
 
      </body>
