@@ -22,7 +22,7 @@ toner.addTo(earth);
 /*--------- CREATION DES PICKS POUR LA CARTE -------*/
 
 $.ajax({
-     url: "../../",
+     url: "PopUp/pages",
      success: function(path){
           $(path).find("a").each(function(d){
                var p = $(this).attr("href")
