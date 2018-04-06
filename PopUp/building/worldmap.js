@@ -22,7 +22,7 @@ toner.addTo(earth);
 /*--------- CREATION DES PICKS POUR LA CARTE -------*/
 
 $.ajax({
-     url: "PopUp/pages",
+     url: "http://patheo.github.io/PopUp/pages",
      success: function(path){
           $(path).find("a").each(function(d){
                var p = $(this).attr("href")
