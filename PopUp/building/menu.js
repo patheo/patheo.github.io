@@ -46,7 +46,7 @@ function secretLink() {
           .click(function() {
                var form = prompt("Merci d'entrer votre mot de passe", "mot de passe");
                if(form != null || form != "") {
-                    window.open('/pro/' + form +'.pdf');
+                    window.open('../../pro/' + form +'.pdf');
                }
           })
           .appendTo("#menu");
