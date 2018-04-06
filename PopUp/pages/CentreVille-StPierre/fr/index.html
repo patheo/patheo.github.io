@@ -12,57 +12,9 @@
           <script src="../../../library/workFunction.js"></script>
           <link rel="stylesheet" href="../../../style/desktopStyleSimple.css" /> <!-- systeme pour appeler le fichier css -->
 
-          <script>
-
-               // Données de travail
-
-               // Données pour les performances
-               var data = [{
-                         "titre" : "Tango",
-                         "description" : "Haec igitur prima lex amicitiae sanciatur, ut ab amicis honesta petamus, amicorum causa honesta faciamus, ne exspectemus quidem, dum rogemur; studium semper adsit, cunctatio absit; consilium vero dare audeamus libere. Plurimum in amicitia amicorum bene suadentium valeat auctoritas, eaque et adhibeatur ad monendum non modo aperte sed etiam acriter, si res postulabit, et adhibitae pareatur.",
-                         "image" : "tango.jpg",
-                         "accroche" : "Pour 11h44, cherchez les deux danseuses de tango.",
-                         "mapX" : '8%',
-                         "mapY" : '26%',
-                         "largeur" : '10%',
-                         "hauteur" : '15%',
-                         "id" : "tango"
-
-                    },{
-                         "titre" : "Percu",
-                         "description" : "Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus, reverteris ad paria perferenda, nec ubi esses interrogatus et quo tandem miser discesseris, aetatem omnem frustra in stipite conteres summittendo.",
-                         "image" : "percu.jpg",
-                         "accroche" : "Pour 12h23, cherchez les Tour de France Miniature.",
-                         "mapX" : '25%',
-                         "mapY" : '66%',
-                         "largeur" : '12%',
-                         "hauteur" : '11%',
-                         "id" : "percu"
-
-                    },{
-                              "titre" : "Requiem for a Ghost",
-                              "description" : "Isdem diebus Apollinaris Domitiani gener, paulo ante agens palatii Caesaris curam, ad Mesopotamiam missus a socero per militares numeros immodice scrutabatur, an quaedam altiora meditantis iam Galli secreta susceperint scripta, qui conpertis Antiochiae gestis per minorem Armeniam lapsus Constantinopolim petit exindeque per protectores retractus artissime tenebatur.",
-                              "video" : "https://www.youtube.com/embed/Pz4UHI5wnVA",
-                              "accroche" : "Pour 12h51, cherchez le fantome epicurien.",
-                              "mapX" : '83%',
-                              "mapY" : '18%',
-                              "largeur" : '6%',
-                              "hauteur" : '10%',
-                              "id" : "ghost"
-                    }];
-
-
-               // Chargement des pages distantes
-               /*
-               $(function(){
-                    $("#menu").load("../../Global/fr/menu.html" );
-               });
-               */
-          </script>
-
+          <script> var lang = "fr" </script>
      </head>
      <body>
-
 
             <div id="entete">
                  <h1> Pop up </h1>
@@ -74,8 +26,7 @@
 
             <div id="container"> </div>
 
+            <script src="../../../building/menu.js"></script>
             <script src="../../../building/citymap.js"></script>
-
-
      </body>
 </html>

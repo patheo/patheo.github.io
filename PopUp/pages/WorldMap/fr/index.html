@@ -12,70 +12,11 @@
           <link rel="stylesheet" href="../../../style/desktopStyleSimple.css" /> <!-- systeme pour appeler le fichier css -->
 
           <script>
-
-               // Données de travail
-
-               var legende = {
-                    "titre" : "Légende",
-                    "soustitre" : "Pour zoomer, utiliser votre molette ! Chaque ville où Pop Up est passée ou passera est indiquée sur cette carte. Chaque couleur représente un type de spectacle donc voici la légende :"
-               }
-
-               var data = [{
-                    "nom" : "Centre-ville - Saint Pierre des Corps",
-                    "mapX" : 47.394,
-                    "mapY" : 0.684,
-                    "type" : "ecriture",
-                    "date" : "Juin 2017",
-                    "folder" : "../CentreVille-StPierre/fr"
-               },
-               {
-                    "nom" : "Saint Henry - Marseille",
-                    "mapX" : 43.3,
-                    "mapY" : 5.4,
-                    "type" : "residence",
-                    "date" : "Octobre 2018",
-                    "folder" : "../StHenry-Marseille/fr"
-               },{
-                    "nom" : "Belle Beille - Angers",
-                    "mapX" : 47.47,
-                    "mapY" : -0.59,
-                    "type" : "avenir",
-                    "date" : "Septembre 2018",
-                    "folder" : "../BelleBeille-Angers/"
-               },{
-                    "nom" : "Brooklyn - New York",
-                    "mapX" : 40.64,
-                    "mapY" : -73.94,
-                    "type" : "avenir",
-                    "date" : "Juin 2019",
-                    "folder" : "../Brooklyn-NewYork/fr"
-               },{
-                    "nom" : "Les deux lions - Tours",
-                    "mapX" : 47.36,
-                    "mapY" : 0.67,
-                    "type" : "avenir",
-                    "date" : "Septembre 2018",
-                    "folder" : "../LesDeuxLions-Tours/fr"
-               },{
-                    "nom" : "Collège Jean Rostand - Saint-Germain-du-Puy",
-                    "mapX" : 47.10,
-                    "mapY" : 2.48,
-                    "type" : "avenir",
-                    "date" : "Mai 2019",
-                    "folder" : "../JeanRostand-StGermainDuPuy/fr"
-               }];
-
-
-               // Chargement des pages distantes
-               $(function(){
-                    $("#menu").load("../../Global/fr/menu.html" );
-               });
+               var lang = "fr";
           </script>
 
      </head>
      <body>
-
-
 
           <div id="entete">
                <h1> Pop up </h1>
@@ -84,10 +25,7 @@
           <div id="container"></div>
 
           <div id="menu"></div>
-
-
-
-
+          <script src="../../../building/menu.js"></script>
 
           <div id="border">
                <h2> Légende </h2>
@@ -96,15 +34,15 @@
                     Chaque couleur indique un type de spectacle différent, voici les explications :
                </div>
                <img src="../src/PickGreen.png" style="float: left; margin : 5px">
-               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Résidence de travail </div>
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Résidences de travail </div>
+               <img src="../src/PickRed.png" style="float: left; margin: 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Spectacles passés </div>
+               <img src="../src/PickViolet.png" style="float: left; margin : 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Spectacles en cours </div>
+               <img src="../src/PickYellow.png" style="float: left; margin: 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Spectacles à venir </div>
                <img src="../src/PickGrey.png" style="float: left; margin : 5px">
                <div style="line-height:60px ; width : 100%; margin-left : 50px"> Vos <h4> POP UP </h4> </div>
-               <img src="../src/PickRed.png" style="float: left; margin: 5px">
-               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Spectacle </div>
-               <img src="../src/PickViolet.png" style="float: left; margin : 5px">
-               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Spectacle à venir </div>
-               <img src="../src/PickYellow.png" style="float: left; margin: 5px">
-               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Résidence d'écriture </div>
 
           </div>
 

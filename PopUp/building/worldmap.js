@@ -1,11 +1,8 @@
+/*--------- FONCTION DE TRAVAIL --------------------*/
+var lang = "fr";
 
 
-
-/*
-Outils pour webglearth
-
-Pour effacer une popUp, il faut passer l'opacity à 0.
-*/
+/*--------- CREATION DU GLOBLE ---------------------*/
 var options = {
      sky: false,
      atmosphere: true,
@@ -18,48 +15,113 @@ var options = {
 
 var earth = new WE.map('container', options);
 
-
 var toner = WE.tileLayer('http://tile.stamen.com/watercolor/{z}/{x}/{y}.png');
 toner.addTo(earth);
 
-for(i = 0 ; i < data.length ; i++) {
 
-     var pick;
+/*--------- CREATION DES PICKS POUR LA CARTE -------*/
 
-     switch (data[i].type) {
-          case "ecriture": pick = '../src/PickYellow.png'; break;
-          case "residence": pick = '../src/PickGreen.png'; break;
-          case "spectacle": pick = '../src/PickRed.png'; break;
-          case "avenir": pick = '../src/PickViolet.png'; break;
-          case "question": pick = '../src/PickGrey.png'; break;
-          default:
+$.ajax({
+     url: "../../",
+     success: function(path){
+          $(path).find("a").each(function(d){
+               var p = $(this).attr("href")
+               $.getJSON("../../" + p + "data.json", function(data) {
 
+                    var pick;
+                    var div = document.createElement('div');
+
+                    switch (data.type) {
+
+                         case "work":
+                              pick = '../src/PickGreen.png';
+
+                              $(div).append(
+                                   $(document.createElement('a'))
+                                        .text(data.nom)
+                                        .attr("href", "../../" + p + lang)
+                              );
+                              break;
+
+                         case "passed":
+                              pick = '../src/PickRed.png';
+                              break;
+
+                         case "inprogress":
+                              pick = '../src/PickViolet.png';
+                              break;
+
+                         case "future":
+                              pick = '../src/PickYellow.png';
+
+                              $(div).append(
+                                        $(document.createElement('a'))
+                                             .text(data.nom)
+                                   )
+                                   .append(
+                                        $(document.createElement('div'))
+                                             .text(data.date)
+                                   )
+                              break;
+
+                         case "yourPopUp":
+                              pick = '../src/PickGrey.png';
+                              break;
+
+                         default:
+                    }
+
+                    var marker = WE.marker( [ data.lat, data.long ], pick, 28, 50).addTo(earth);
+
+                    marker.bindPopup($(div).prop("outerHTML"), {maxWidth: 150, closeButton: true});
+
+                    $('.we-pm-icon').each(function(){
+                         $(this)
+                              .css("transform-origin", "50% bottom")
+                              .css("transform", "rotate(" + (Math.random() * 360) + "deg)")
+                              .click(function(){
+                                   $('.we-pm-icon').css('z-index', 10);
+                                   $('.we-pp').css('opacity', 0);
+                                   $('.we-pp').css('visibilty', 'hidden');
+                                   $(this).parent().children('.we-pp').css('opacity', 1);
+                                   $(this).parent().children('.we-pp').css('visibility', 'visible');
+                                   $(this).css('z-index', 100)
+                         })
+
+                    })
+
+               })
+          })
+
+
+
+          $('.we-pm-icon').each(function(){
+
+               console.log("ok");
+               $(this).click(function(){
+                         $('.we-pm-icon').css('z-index', 10);
+                         $('.we-pp').css('opacity', 0);
+                         $('.we-pp').css('visibilty', 'hidden');
+                         $(this).parent().children('.we-pp').css('opacity', 1);
+                         $(this).parent().children('.we-pp').css('visibility', 'visible');
+                         $(this).css('z-index', 100)
+               })
+
+          })
      }
-     var marker = WE.marker( [ data[i].mapX, data[i].mapY ], pick, 28, 50).addTo(earth);
-     //marker.bindPopup("<b>" + data[i].nom + "</b><br>" + data[i].date, {maxWidth: 150, closeButton: true});
+})
 
-     var d = document.createElement('a');
-     $(d).text(data[i].nom)
+// Modification des paramêtre des picks
 
-          .attr('href', "../" + data[i].folder);
+/*
+Outils pour webglearth
 
-     marker.bindPopup($(d).prop("outerHTML"), {maxWidth: 150, closeButton: true});
+Pour effacer une popUp, il faut passer l'opacity à 0.
+*/
 
-}
 
 // Modification de la fonction de click des icons
-$('.we-pm-icon').each(function(){
 
-     $(this).click(function(){
-          $('.we-pm-icon').css('z-index', 10);
-          $('.we-pp').css('opacity', 0);
-          $('.we-pp').css('visibilty', 'hidden');
-          $(this).parent().children('.we-pp').css('opacity', 1);
-          $(this).parent().children('.we-pp').css('visibility', 'visible');
-          $(this).css('z-index', 100)
-     });
-
-});
 
 $("#legende").appendTo("#boder");
 
@@ -82,4 +144,4 @@ function resetZoom() {
 
 }
 
-zoom($("body"));
+zoom($("body"), lang);

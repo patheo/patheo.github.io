@@ -1,0 +1,61 @@
+
+<!DOCTYPE HTML>
+
+<html>
+     <head>
+          <title>Pop Up : Map</title>
+          <meta charset="utf-8"  /> <!-- charset encodage des caractères -->
+          <meta name="keywords" content=""> <!--  mots cleés pour accéder au site, référencement de recherche -->
+          <script src="../../../library/jquery-3.3.1.min.js"></script>
+          <script src="../../../library/webGlEarth.js"></script>
+          <script src="../../../library/workFunction.js"></script>
+          <link rel="stylesheet" href="../../../style/desktopStyleSimple.css" /> <!-- systeme pour appeler le fichier css -->
+
+          <script>
+               // Chargement des pages distantes
+               /*
+               $(function(){
+                    $("#menu").load("../../Global/fr/menu.html" );
+               });
+               */
+               var lang = "eng";
+          </script>
+
+     </head>
+     <body>
+
+
+
+          <div id="entete">
+               <h1> Pop up </h1>
+          </div>
+
+          <div id="container"></div>
+
+          <div id="menu"></div>
+          <script src="../../../building/menu.js"></script>
+
+          <div id="border">
+               <h2> Legend </h2>
+               <div style="margin: 5px">
+                    You can find all place, where <h4> POP UP </h4> is past.
+               </div>
+               <img src="../src/PickGreen.png" style="float: left; margin : 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Working Time </div>
+               <img src="../src/PickRed.png" style="float: left; margin: 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Passed Show </div>
+               <img src="../src/PickViolet.png" style="float: left; margin : 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Show in progress </div>
+               <img src="../src/PickYellow.png" style="float: left; margin: 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Future Show </div>
+               <img src="../src/PickGrey.png" style="float: left; margin : 5px">
+               <div style="line-height:60px ; width : 100%; margin-left : 50px"> Your <h4> POP UP </h4> </div>
+
+          </div>
+
+          <script src="../../../building/worldmap.js"></script>
+
+
+
+     </body>
+</html>

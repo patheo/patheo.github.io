@@ -39,12 +39,15 @@ function zoom(parent) {
                .text("+")
                .appendTo(array)
 
+     var desc;
+     if(lang == "fr") {desc = "Pour zoomer vous pouvez aussi utliser la molette de la souris."}
+     if(lang == "eng") {desc = "For zooming, you could use the scroll."}
      $(document.createElement('h3'))
                .css({"font-size" : "10px",
                     "text-align" : "center",
                     "margin" : "5%",
                     "margin-top" : "-10px"})
-               .text("Pour zoomer vous pouvez aussi utliser la molette de la souris.")
+               .text(desc)
                .appendTo(zoomContent)
 
 

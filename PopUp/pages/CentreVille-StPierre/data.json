@@ -1,0 +1,51 @@
+{
+     "nom" : "Center-Ville, St-Pierre-des-Corps",
+     "lat" : 47.394,
+     "long" : 0.684,
+     "date" : "Juillet 2017",
+     "type" : "work",
+     "performance" : [
+          {
+               "nom" : "Tango",
+               "descriptionFr" : "Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus, reverteris ad paria perferenda, nec ubi esses interrogatus et quo tandem miser discesseris, aetatem omnem frustra in stipite conteres summittendo.",
+               "descriptionEng" : "Isdem diebus Apollinaris Domitiani gener, paulo ante agens palatii Caesaris curam, ad Mesopotamiam missus a socero per militares numeros immodice scrutabatur, an quaedam altiora meditantis iam Galli secreta susceperint scripta, qui conpertis Antiochiae gestis per minorem Armeniam lapsus Constantinopolim petit exindeque per protectores retractus artissime tenebatur.",
+               "image" : true,
+               "heure" : "11h44",
+               "indiceFr" : "Cherchez les deux danseuses de tango",
+               "indiceEng" : "Search for the two tango dancers",
+               "mapX" : "8%",
+               "mapY" : "26%",
+               "width" : "10%",
+               "height" : "15%",
+               "id" : "tango"
+          },
+          {
+               "nom" : "Power Trio",
+               "descriptionFr" : "Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus, reverteris ad paria perferenda, nec ubi esses interrogatus et quo tandem miser discesseris, aetatem omnem frustra in stipite conteres summittendo.",
+               "descriptionEng" : "Isdem diebus Apollinaris Domitiani gener, paulo ante agens palatii Caesaris curam, ad Mesopotamiam missus a socero per militares numeros immodice scrutabatur, an quaedam altiora meditantis iam Galli secreta susceperint scripta, qui conpertis Antiochiae gestis per minorem Armeniam lapsus Constantinopolim petit exindeque per protectores retractus artissime tenebatur.",
+               "image" : true,
+               "heure" : "12h23",
+               "indiceFr" : "Cherchez les Tour de France Miniature.",
+               "indiceEng" : "Search for the little Tours de France",
+               "mapX" : "25%",
+               "mapY" : "66%",
+               "width" : "12%",
+               "height" : "11%",
+               "id" : "percu"
+          },
+          {
+               "nom" : "Requiem for a Ghost",
+               "descriptionFr" : "Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus, reverteris ad paria perferenda, nec ubi esses interrogatus et quo tandem miser discesseris, aetatem omnem frustra in stipite conteres summittendo.",
+               "descriptionEng" : "Isdem diebus Apollinaris Domitiani gener, paulo ante agens palatii Caesaris curam, ad Mesopotamiam missus a socero per militares numeros immodice scrutabatur, an quaedam altiora meditantis iam Galli secreta susceperint scripta, qui conpertis Antiochiae gestis per minorem Armeniam lapsus Constantinopolim petit exindeque per protectores retractus artissime tenebatur.",
+               "video" : "https://www.youtube.com/embed/Pz4UHI5wnVA",
+               "heure" : "12h51",
+               "indiceFr" : "Cherchez le fantôme épicurien.",
+               "indiceEng" : "Search for the ghost.",
+               "mapX" : "83%",
+               "mapY" : "18%",
+               "width" : "6%",
+               "height" : "10%",
+               "id" : "ghost"
+          }
+     ]
+}
