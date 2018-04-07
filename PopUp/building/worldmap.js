@@ -21,6 +21,7 @@ toner.addTo(earth);
 
 /*--------- CREATION DES PICKS POUR LA CARTE -------*/
 
+function loadPick() {
 $.ajax({
      url: "http://patheo.github.io/PopUp/pages",
      success: function(path){
@@ -111,6 +112,8 @@ $.ajax({
           })
      }
 })
+
+}
 
 // Modification des paramêtre des picks
 
