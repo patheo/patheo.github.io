@@ -28,6 +28,7 @@ $.ajax({
                var p = $(this).attr("href")
                $.getJSON("../../" + p + "data.json", function(data) {
 
+                    console.log("OK)");
                     var pick;
                     var div = document.createElement('div');
 
