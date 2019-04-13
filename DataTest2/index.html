@@ -1,0 +1,134 @@
+<html>
+<head>
+     <title>--Stellar--</title>
+
+          <!-- Chargement des bibliothèques JS -->
+          <meta charset="utf-8"/>
+          <script src="libary/jquery-2.1.4.min.js"></script>
+          <script src="libary/p5.js"></script>
+
+     </head>
+     <body style="margin : 0px">
+          <script>
+
+          let table;
+          var nbPoint = 1000;
+
+          let pg;
+
+          var genList = [];
+
+          function Gen() {
+
+          }
+
+          function preload() {
+
+               table = loadTable('data/renewable_power_plants_FR.csv', 'csv', "header");
+
+          }
+
+          function setup() {
+
+
+
+               createCanvas(windowWidth, windowHeight);
+               background(0);
+
+               pg = createGraphics(800, 800, WEBGL);
+               pg.translate(0, 0, -800);
+               pg.rotateX(-0.8);
+
+
+               /*
+               for(let i = 0 ; i < table.getRowCount() ; i++){
+
+                    var x = map(parseFloat(table.getString(i, 9)), -5, 8.4, 0, width);
+                    var y = map(parseFloat(table.getString(i, 8)), 51.3, 42.1, 0, height);
+
+                    switch (table.getString(i, 3)) {
+                         case "Solar": stroke(255, 0, 0);break;
+                         case "Wind": stroke(0, 255, 0);break;
+                         case "Bioenergy": stroke(0, 0, 255);break;
+                         case "Hydro": stroke(255, 0, 255);break;
+                         case "Geothermal": stroke(0, 255, 255);break;
+                         default: stroke(255, 255, 255);
+
+                    }
+                    point(x, y);
+
+               }
+               */
+
+
+               for (i = 0 ; i < nbPoint ; i++) {
+
+                    var newGen = new Gen();
+                    var sel = parseInt(random(table.getRowCount()));
+                    newGen.x = map(parseFloat(table.getString(sel, 9)), -5, 8.4, -pg.width/2, pg.width/2);
+                    newGen.y = map(parseFloat(table.getString(sel, 8)), 51.3, 42.1, -pg.height/2, pg.height/2);
+                    newGen.deltaSize = parseFloat(table.getString(sel, 6));
+                    newGen.size = random(100);
+
+                    genList.push(newGen);
+
+               }
+
+          }
+
+          function draw() {
+
+
+
+               background(0, 10);
+               pg.background(0);
+               pg.stroke(255);
+               //orbitControl();
+
+               //pg.rotateX(-0.01);
+               pg.rotateZ(0.001);
+
+               //camera(width/2+sin(frameCount*0.01)*100, height/2+cos(frameCount*0.01)*100, 10, width/2, height/2, 0, 0, 1, 0);
+               //camera(width/2, height/2, 200, 0, 0, 0, 0, 0, 0);
+
+               /*
+               for (i = 0 ; i < 10 ; i++) {
+
+                    var val1 = parseInt(random(table.getRowCount()));
+                    var val2 = parseInt(random(table.getRowCount()));
+                    var x1 = map(parseFloat(table.getString(val1, 9)), -5, 8.4, -width/2, width/2);
+                    var y1 = map(parseFloat(table.getString(val1, 8)), 51.3, 42.1, -height/2, height/2);
+                    var x2 = map(parseFloat(table.getString(val2, 9)), -5, 8.4, -width/2, width/2);
+                    var y2 = map(parseFloat(table.getString(val2, 8)), 51.3, 42.1, -height/2, height/2);
+
+                    //line(x1, y1, 0, x2, y2, 0);
+
+               }
+               */
+               for (i = 0 ; i < genList.length ; i++){
+
+                    pg.stroke(abs(cos(genList[i].x*0.01+frameCount*0.01))*255, abs(cos(genList[i].y+frameCount*0.1))*255, 100);
+                    genList[i].size += genList[i].deltaSize;
+                    pg.line(genList[i].x, genList[i].y, cos(genList[i].size)*20, genList[i].x, genList[i].y, -cos(genList[i].size)*20);
+                    //pg.point(genList[i].x, genList[i].y);
+
+               }
+
+               image(pg, width/2-pg.width/2, height/2-pg.height/2);
+               //filter(DILATE);
+               //text(frameRate(), 20, 20);
+
+
+          }
+
+          // 8 = latitude // 9 = long
+
+
+          /*
+               Longitude française -4.4744 à 8.1350
+               Lattitude française 51.0521 à 42.1948
+          */
+
+          </script>
+     </body>
+</html>

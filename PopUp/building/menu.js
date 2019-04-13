@@ -41,12 +41,12 @@ function page() {
 }
 
 function secretLink() {
-     $(document.createElement('a')).attr('href', "../../" + datamenu[i][1] + "/" + datamenu[0])
+     $(document.createElement('a'))
           .text(datamenu[i][0])
           .click(function() {
                var form = prompt("Merci d'entrer votre mot de passe", "mot de passe");
                if(form != null || form != "") {
-                    window.open('../../pro/' + form +'.pdf');
+                    window.open('../pro/' + form +'.pdf');
                }
           })
           .appendTo("#menu");
